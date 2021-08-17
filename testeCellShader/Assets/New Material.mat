@@ -109,14 +109,14 @@ Material:
     - _Green: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthSensitivity: 0.186
+    - _OutlineDepthSensitivity: 0.012
     - _OutlineNormalsSensitivity: 0
-    - _OutlineThickness: 3
+    - _OutlineThickness: 50
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Red: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
