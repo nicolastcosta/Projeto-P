@@ -10,9 +10,9 @@ public class Player_Movimentation : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
-    private float moveSpeed, turnRate, jumpHight;
+    private float moveSpeed, turnRate;
     private float gravity = -15f;
-    private float gravityVelocity, turnRateVelocity, jumpForce;
+    private float gravityVelocity, turnRateVelocity;
 
     private Vector3 moveDirection;
     private Quaternion targetAngle;
@@ -45,23 +45,10 @@ public class Player_Movimentation : MonoBehaviour
 
     void Gravity()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (controller.isGrounded)
-            {
-                jumpForce = jumpHight;
-                animator.SetTrigger("jump");
-            }
-        }
-
         gravityVelocity += Time.deltaTime * gravity;
 
-        jumpForce += gravity * Time.deltaTime;
-        if (jumpForce <= 0)
-            jumpForce = 0;
-
         if (controller.isGrounded)
-            gravityVelocity = 0 + jumpForce;
+            gravityVelocity = 0;
     }
 
     void Move()

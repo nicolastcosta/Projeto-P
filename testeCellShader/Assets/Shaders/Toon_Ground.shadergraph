@@ -604,6 +604,8 @@
         "m_GuidSerialized": "48383cef-b6a7-4d33-8156-286726a3eb47"
     },
     "m_Name": "Main Texture (Black)",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Texture2D_B88C976D",
     "m_OverrideReferenceName": "_MainTexture",
     "m_GeneratePropertyBlock": true,
@@ -633,6 +635,8 @@
         "m_GuidSerialized": "695e2ab3-b878-4635-8516-e09ccda2ca3c"
     },
     "m_Name": "Main Texture Scale",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector1_962A2B9D",
     "m_OverrideReferenceName": "_MainTextureScale",
     "m_GeneratePropertyBlock": true,
@@ -931,6 +935,8 @@
         "m_GuidSerialized": "550c4f91-2142-436e-afd6-d77271e553b7"
     },
     "m_Name": "SpecularMap",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Texture2D_68FC8F24",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": false,
