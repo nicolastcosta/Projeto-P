@@ -641,13 +641,15 @@
 }
 
 {
-    "m_SGVersion": 2,
+    "m_SGVersion": 3,
     "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
     "m_ObjectId": "15bdc82c85b3a185a9e24f780531febf",
     "m_Guid": {
         "m_GuidSerialized": "93f032d4-5bfa-4a59-93d0-5f1acd403407"
     },
     "m_Name": "Specular Color",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Color_29D37DE3",
     "m_OverrideReferenceName": "_SpecularColor",
     "m_GeneratePropertyBlock": true,
@@ -683,13 +685,15 @@
 }
 
 {
-    "m_SGVersion": 2,
+    "m_SGVersion": 3,
     "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
     "m_ObjectId": "1be6bad3d078fd87b32f5059a80dfaf7",
     "m_Guid": {
         "m_GuidSerialized": "326c6ba8-102e-47c1-9261-a79f19be76fb"
     },
     "m_Name": "Tint",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Color_78A92FED",
     "m_OverrideReferenceName": "_MainColor",
     "m_GeneratePropertyBlock": true,
@@ -731,6 +735,8 @@
         "m_GuidSerialized": "cb0d733d-23aa-4da2-a549-2a2a08700d4b"
     },
     "m_Name": "Tiling",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector2_C7D26BC1",
     "m_OverrideReferenceName": "_Tiling",
     "m_GeneratePropertyBlock": true,
@@ -1031,6 +1037,8 @@
         "m_GuidSerialized": "a8ceff60-2d90-4f57-9fa3-019f639f3cb7"
     },
     "m_Name": "Outline Thickness",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector1_C0310D2",
     "m_OverrideReferenceName": "_OutlineThickness",
     "m_GeneratePropertyBlock": true,
@@ -1079,6 +1087,8 @@
         "m_GuidSerialized": "011f94b5-08db-4347-83e2-0ec6b9b07d8c"
     },
     "m_Name": "Smoothness",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector1_268F2E0F",
     "m_OverrideReferenceName": "_Smoothness",
     "m_GeneratePropertyBlock": true,
@@ -1192,6 +1202,8 @@
         "m_GuidSerialized": "98f773de-2c55-465d-8e14-0e22421fdb13"
     },
     "m_Name": "Emission Intensity",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector1_8606F96E",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -1253,6 +1265,8 @@
         "m_GuidSerialized": "22217140-ea0f-40ff-b7ed-84e483a0f725"
     },
     "m_Name": "Normals Sensitivity",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector1_C3479DA3",
     "m_OverrideReferenceName": "_OutlineNormalsSensitivity",
     "m_GeneratePropertyBlock": true,
@@ -1328,6 +1342,8 @@
         "m_GuidSerialized": "48383cef-b6a7-4d33-8156-286726a3eb47"
     },
     "m_Name": "Color Texture",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Texture2D_B88C976D",
     "m_OverrideReferenceName": "_MainTexture",
     "m_GeneratePropertyBlock": true,
@@ -1351,6 +1367,8 @@
         "m_GuidSerialized": "c90dedae-6ce4-497d-9bff-f60db16ddc5c"
     },
     "m_Name": "Specular Map",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Texture2D_324DDB62",
     "m_OverrideReferenceName": "_SpecularMap",
     "m_GeneratePropertyBlock": true,
@@ -1622,6 +1640,8 @@
         "m_GuidSerialized": "61015679-8aee-45c0-9321-f5ed2e90eae5"
     },
     "m_Name": "Depth Sensitivity",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector1_A81369DC",
     "m_OverrideReferenceName": "_OutlineDepthSensitivity",
     "m_GeneratePropertyBlock": true,
@@ -2221,6 +2241,8 @@
         "m_GuidSerialized": "0483fa45-346a-4955-a866-051fe1e6caae"
     },
     "m_Name": "Emission Map",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Texture2D_300EB541",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -2824,6 +2846,8 @@
         "m_GuidSerialized": "7cb0dea0-f999-405b-a10c-78995eb2192a"
     },
     "m_Name": "Offset",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector2_C0798491",
     "m_OverrideReferenceName": "_Offset",
     "m_GeneratePropertyBlock": true,
