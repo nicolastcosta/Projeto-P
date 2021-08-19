@@ -38,8 +38,8 @@ public class Player_Movimentation : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             targetAngle = Quaternion.LookRotation(moveDirection, Vector3.up);
-            Quaternion angle = Quaternion.RotateTowards(transform.rotation, targetAngle, turnRate * Time.deltaTime);
-            transform.rotation = angle;
+            Quaternion angle = Quaternion.RotateTowards(unitModel.transform.rotation, targetAngle, turnRate * Time.deltaTime);
+            unitModel.transform.rotation = angle;
         }
     }
 
