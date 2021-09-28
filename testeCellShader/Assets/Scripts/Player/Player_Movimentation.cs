@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Player_Movimentation : MonoBehaviour
 {
-    [SerializeField]
     private GameObject unitModel;
     private CharacterController controller;
     private Animator animator;
 
-    [SerializeField]
     private float moveSpeed, turnRate;
     private float gravity = -15f;
     private float gravityVelocity, turnRateVelocity;
@@ -21,13 +19,17 @@ public class Player_Movimentation : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        unitModel = GetComponent<Unit_Info>().modelo;
+        animator = GetComponent<Unit_Info>().animator;
         controller = GetComponent<CharacterController>();
-        animator = unitModel.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        moveSpeed = GetComponent<Unit_Info>().velocidade;
+        turnRate = GetComponent<Unit_Info>().velocidadeDeGiro;
+
         Gravity();
         Turn();
         Move();
@@ -38,8 +40,8 @@ public class Player_Movimentation : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             targetAngle = Quaternion.LookRotation(moveDirection, Vector3.up);
-            Quaternion angle = Quaternion.RotateTowards(transform.rotation, targetAngle, turnRate * Time.deltaTime);
-            transform.rotation = angle;
+            Quaternion angle = Quaternion.RotateTowards(unitModel.transform.rotation, targetAngle, turnRate * Time.deltaTime);
+            unitModel.transform.rotation = angle;
         }
     }
 
