@@ -15,12 +15,14 @@ public class Player_Companion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int index = 0; index < companion.Length; index++)
+        if (companion[0] != null)
         {
-            UpdateVariables(index);
-            Move(index);
+            for (int index = 0; index < companion.Length; index++)
+            {
+                UpdateVariables(index);
+                Move(index);
+            }
         }
-            
     }
 
     //Aqui atualiza o NavMesh para as opções base da base da Unidade
