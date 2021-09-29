@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class UI_Follow : MonoBehaviour
+public class Name_Tag : MonoBehaviour
 {
-    [SerializeField]
     private Camera cam;
-
-    [SerializeField]
     private Transform target;
+    private Vector3 offset;
 
     [SerializeField]
-    private Vector3 offset;
+    private TextMeshProUGUI text;
+
+    private void Awake()
+    {
+        cam = Camera.main;
+    }
 
     // Update is called once per frame
     void Update()
@@ -20,5 +24,12 @@ public class UI_Follow : MonoBehaviour
 
         if (transform.position != pos)
             transform.position = pos;
+    }
+
+    public void SetAttributes(string name, Transform targetTemp, Vector3 nameTagOffset)
+    {
+        text.text = name;
+        target = targetTemp;
+        offset = nameTagOffset;
     }
 }

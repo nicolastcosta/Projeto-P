@@ -10,7 +10,7 @@ public class Player_Movimentation : MonoBehaviour
 
     private float moveSpeed, turnRate;
     private float gravity = -15f;
-    private float gravityVelocity, turnRateVelocity;
+    private float gravityVelocity;
 
     private Vector3 moveDirection;
     private Quaternion targetAngle;
@@ -19,7 +19,7 @@ public class Player_Movimentation : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        unitModel = GetComponent<Unit_Info>().modelo;
+        unitModel = GetComponent<Unit_Info>().model;
         animator = GetComponent<Unit_Info>().animator;
         controller = GetComponent<CharacterController>();
     }
@@ -27,8 +27,8 @@ public class Player_Movimentation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveSpeed = GetComponent<Unit_Info>().velocidade;
-        turnRate = GetComponent<Unit_Info>().velocidadeDeGiro;
+        moveSpeed = GetComponent<Unit_Info>().speed;
+        turnRate = GetComponent<Unit_Info>().turnRate;
 
         Gravity();
         Turn();
