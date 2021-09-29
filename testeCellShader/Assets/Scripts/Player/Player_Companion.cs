@@ -26,8 +26,8 @@ public class Player_Companion : MonoBehaviour
     //Aqui atualiza o NavMesh para as opções base da base da Unidade
     void UpdateVariables(int index)
     {
-        companion[index].GetComponent<NavMeshAgent>().speed = companion[index].GetComponent<Unit_Info>().velocidade;
-        companion[index].GetComponent<NavMeshAgent>().angularSpeed = companion[index].GetComponent<Unit_Info>().velocidadeDeGiro;
+        companion[index].GetComponent<NavMeshAgent>().speed = companion[index].GetComponent<Unit_Info>().speed;
+        companion[index].GetComponent<NavMeshAgent>().angularSpeed = companion[index].GetComponent<Unit_Info>().turnRate;
         companion[index].GetComponent<NavMeshAgent>().radius = companion[index].GetComponent<CapsuleCollider>().radius;
         companion[index].GetComponent<NavMeshAgent>().height = companion[index].GetComponent<CapsuleCollider>().height;
     }

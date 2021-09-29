@@ -35,6 +35,9 @@ TextureImporter:
   - first:
       213: 1715162128662532806
     second: Cell_Icons
+  - first:
+      213: -3797453804850108732
+    second: Sword
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -164,7 +167,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 526
-        y: 244
+        y: 556
         width: 372
         height: 163
       alignment: 0
@@ -185,7 +188,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 526
-        y: 186
+        y: 498
         width: 253
         height: 40
       alignment: 0
@@ -206,7 +209,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 528
-        y: 138
+        y: 450
         width: 248
         height: 35
       alignment: 0
@@ -227,7 +230,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 528
-        y: 89
+        y: 401
         width: 248
         height: 34
       alignment: 0
@@ -248,7 +251,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
-        y: 23
+        y: 335
         width: 149
         height: 150
       alignment: 0
@@ -269,7 +272,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 251
-        y: 239
+        y: 551
         width: 59
         height: 152
       alignment: 0
@@ -290,7 +293,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 187
+        y: 499
         width: 241
         height: 221
       alignment: 0
@@ -311,7 +314,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 226
-        y: 0
+        y: 312
         width: 229
         height: 170
       alignment: 0
@@ -331,12 +334,12 @@ TextureImporter:
       name: Cell_Mask
       rect:
         serializedVersion: 2
-        x: 928
-        y: 130
+        x: 934
+        y: 440
         width: 128
         height: 269
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -353,11 +356,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1087
-        y: 109
+        y: 421
         width: 146
         height: 296
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -373,12 +376,12 @@ TextureImporter:
       name: Cell_Icons
       rect:
         serializedVersion: 2
-        x: 1248
-        y: 125
+        x: 1262
+        y: 437
         width: 128
         height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -386,6 +389,27 @@ TextureImporter:
       bones: []
       spriteID: 6c212236eda7dc710800000000000000
       internalID: 1715162128662532806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 0
+        width: 136
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c624fe52ebbc4bc0800000000000000
+      internalID: -3797453804850108732
       vertices: []
       indices: 
       edges: []
