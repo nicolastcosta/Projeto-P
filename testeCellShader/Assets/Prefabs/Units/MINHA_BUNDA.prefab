@@ -160,7 +160,7 @@ MonoBehaviour:
     ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1072555, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -602,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c814f270a18fbc74397588d04497db15, type: 2}
     - target: {fileID: 919132149155446097, guid: 8299b7bce8154b644a8ab5e5263d0044, type: 3}
       propertyPath: m_Name
-      value: MinhaBunda
+      value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8299b7bce8154b644a8ab5e5263d0044, type: 3}
