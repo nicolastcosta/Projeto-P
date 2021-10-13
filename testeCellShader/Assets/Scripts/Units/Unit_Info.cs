@@ -24,6 +24,9 @@ public class Unit_Info : MonoBehaviour
     [SerializeField]
     private Vector3 nameTagOffset;
 
+    [HideInInspector]
+    public GameObject nameTag;
+
     [Header("Life")]
     [Range(1, 35)]
     public int lifeMax = 1;
@@ -51,6 +54,9 @@ public class Unit_Info : MonoBehaviour
     [Header("Mapa")]
     public GameObject minimapIcon;
 
+    [Header("Combat")]
+    public bool isInCombat;
+
 
 
 
@@ -61,9 +67,9 @@ public class Unit_Info : MonoBehaviour
         {
             if (nameTagPrefab != null && nameTagUI != null)
             {
-                GameObject nameTagTemp = Instantiate(nameTagPrefab, transform.position, Quaternion.identity) as GameObject;
-                nameTagTemp.transform.parent = nameTagUI.transform;
-                nameTagTemp.GetComponent<Name_Tag>().SetAttributes(unitName, transform, nameTagOffset);
+                nameTag = Instantiate(nameTagPrefab, transform.position, Quaternion.identity) as GameObject;
+                nameTag.transform.parent = nameTagUI.transform;
+                nameTag.GetComponent<Name_Tag>().SetAttributes(unitName, transform, nameTagOffset);
 
             }
             else
