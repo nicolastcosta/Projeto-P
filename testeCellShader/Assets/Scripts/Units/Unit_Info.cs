@@ -5,11 +5,15 @@ using UnityEngine;
 public class Unit_Info : MonoBehaviour
 {
     [Header("Essencials")]
+    //objeto que carrega o modelo
     public GameObject model;
+    //o animator que o modelo carrega
     [HideInInspector]
     public Animator animator;
     
+
     [Header("Name")]
+    //
     public string unitName = "sem nome";
 
     [SerializeField]
@@ -28,10 +32,10 @@ public class Unit_Info : MonoBehaviour
     public GameObject nameTag;
 
     [Header("Life")]
-    [Range(1, 35)]
+    [Range(1, 500)]
     public int lifeMax = 1;
 
-    [Range(1, 35)]
+    [Range(1, 500)]
     public int lifeCur = 1;
 
     [Range(0, 10)]
@@ -63,13 +67,14 @@ public class Unit_Info : MonoBehaviour
     void Awake()
     {
         animator = model.GetComponent<Animator>();
+
         if (hasNameTag == true)
         {
             if (nameTagPrefab != null && nameTagUI != null)
             {
                 nameTag = Instantiate(nameTagPrefab, transform.position, Quaternion.identity) as GameObject;
-                nameTag.transform.parent = nameTagUI.transform;
-                nameTag.GetComponent<Name_Tag>().SetAttributes(unitName, transform, nameTagOffset);
+                nameTag.transform.parent = transform;
+                nameTag.GetComponent<Name_Tag>().SetAttributes(unitName, nameTagOffset);
 
             }
             else

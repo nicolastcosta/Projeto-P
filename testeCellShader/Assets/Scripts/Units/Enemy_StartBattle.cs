@@ -37,6 +37,9 @@ public class Enemy_StartBattle : MonoBehaviour
             interact = false;
             fadeAnimator.Play("Fade_Combat_Start");
             battleBoard.GetComponent<Battle_System>().StartBattle(target, gameObject);
+
+
+
         }
     }
 }

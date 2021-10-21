@@ -6,13 +6,11 @@ using TMPro;
 public class Name_Tag : MonoBehaviour
 {
     private Camera cam;
-    private Transform target;
+
+    private Transform faceTarget;
     private Vector3 offset;
 
-    [SerializeField]
-    private TextMeshProUGUI text;
-
-    private void Awake()
+    void Awake()
     {
         cam = Camera.main;
     }
@@ -20,16 +18,16 @@ public class Name_Tag : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 pos = cam.WorldToScreenPoint(target.position + offset);
+        transform.LookAt(cam.transform.position);
+        /*Vector3 pos = target.position + offset;
 
         if (transform.position != pos)
-            transform.position = pos;
+            transform.position = pos;*/
     }
 
-    public void SetAttributes(string name, Transform targetTemp, Vector3 nameTagOffset)
+    public void SetAttributes(string nameTemp, Vector3 offsetTemp)
     {
-        text.text = name;
-        target = targetTemp;
-        offset = nameTagOffset;
+        GetComponent<TextMeshPro>().text = nameTemp;
+        offset = offsetTemp;
     }
 }
