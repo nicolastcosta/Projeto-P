@@ -33,11 +33,15 @@ public class Select_Unit : MonoBehaviour
         //ao clicar e estiver com o mouse em cima do objeto vai selecionar e mandar a informacao para o battle system
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (hover != null && battleSystem.GetComponent<Battle>().selecting == true)
+            if (hover != null && battleSystem.GetComponent<Battle>().selecting == true && tag == "Player")
             {
                 isSelected = true;
                 rend.material.color = Color.green;
                 battleSystem.GetComponent<Battle>().SelectUnit(host);
+            }
+            else if (hover != null && battleSystem.GetComponent<Battle>().targeting == true && tag == "Enemy")
+            {
+                battleSystem.GetComponent<Battle>().SelectTarget(host);
             }
         }
     }

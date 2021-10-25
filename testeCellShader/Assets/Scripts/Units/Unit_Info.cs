@@ -13,7 +13,6 @@ public class Unit_Info : MonoBehaviour
     
 
     [Header("Name")]
-    //
     public string unitName = "sem nome";
 
     [SerializeField]
@@ -59,7 +58,9 @@ public class Unit_Info : MonoBehaviour
     public GameObject minimapIcon;
 
     [Header("Combat")]
-    public bool isInCombat;
+    public bool isInCombat, isDead;
+
+    public int attackDamage;
 
 
 
@@ -93,5 +94,28 @@ public class Unit_Info : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void TakeDamage(int damageTanken, bool isDefending)
+    {
+        if (lifeCur > damageTanken)
+        {
+            if (isDefending == false)
+            {
+                lifeCur -= damageTanken;
+                animator.SetTrigger("damaged");
+            }
+            else
+            {
+                lifeCur -= damageTanken / 2;
+                animator.SetTrigger("defend");
+            }
+        }
+        else
+        {
+            animator.SetBool("dead", true);
+            lifeCur = 0;
+            isDead = true;
+        }
     }
 }
