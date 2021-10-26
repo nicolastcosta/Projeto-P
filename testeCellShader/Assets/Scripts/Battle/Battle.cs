@@ -138,7 +138,7 @@ public class Battle : MonoBehaviour
     {
         for (int a = 0; a <= 5; a++)
         {
-            if (playerSelected[a].GetComponent<Unit_Info>().isDead == false && playerTarget[a].GetComponent<Unit_Info>().isDead == false)
+            if (playerSelected[a].GetComponent<Unit_Info>().isDead == false)
             {
                 PlayerAction(a);
                 if (enemyAction[a] != BattleAction.Defend)
@@ -146,7 +146,7 @@ public class Battle : MonoBehaviour
             }
             playerActionIcon[a].GetComponent<Action_Icons>().ResetIcon();
 
-            if (enemySelected[a].GetComponent<Unit_Info>().isDead == false && enemyTarget[a].GetComponent<Unit_Info>().isDead == false)
+            if (enemySelected[a].GetComponent<Unit_Info>().isDead == false)
             {
                 EnemyAction(a);
                 if (playerAction[a] != BattleAction.Defend)
@@ -154,6 +154,10 @@ public class Battle : MonoBehaviour
             }
             enemyActionIcon[a].GetComponent<Action_Icons>().ResetIcon();
         }
+
+        action = 0;
+        selecting = true;
+        targeting = false;
     }
 
     void PlayerAction(int act)
@@ -162,16 +166,19 @@ public class Battle : MonoBehaviour
         {
             case BattleAction.Attack:
                 {
-                    playerSelected[act].GetComponent<Unit_Info>().animator.SetTrigger("attack");
+                    if (playerTarget[act].GetComponent<Unit_Info>().isDead == false)
+                    {
+                        playerSelected[act].GetComponent<Unit_Info>().animator.SetTrigger("attack");
 
-                    bool defend;
-                    if (enemyAction[act] == BattleAction.Defend && playerTarget[act] == enemySelected[act])
-                        defend = true;
-                    else
-                        defend = false;
+                        bool defend;
+                        if (enemyAction[act] == BattleAction.Defend && playerTarget[act] == enemySelected[act])
+                            defend = true;
+                        else
+                            defend = false;
 
 
-                    playerTarget[act].GetComponent<Unit_Info>().TakeDamage(playerSelected[act].GetComponent<Unit_Info>().attackDamage, defend);
+                        playerTarget[act].GetComponent<Unit_Info>().TakeDamage(playerSelected[act].GetComponent<Unit_Info>().attackDamage, defend);
+                    }
                     break;
                 }
             case BattleAction.Defend:
@@ -187,15 +194,18 @@ public class Battle : MonoBehaviour
         {
             case BattleAction.Attack:
                 {
-                    enemySelected[act].GetComponent<Unit_Info>().animator.SetTrigger("attack");
+                    if (enemyTarget[act].GetComponent<Unit_Info>().isDead == false)
+                    {
+                        enemySelected[act].GetComponent<Unit_Info>().animator.SetTrigger("attack");
 
-                    bool defend;
-                    if (playerAction[act] == BattleAction.Defend && playerSelected[act] == enemyTarget[act])
-                        defend = true;
-                    else
-                        defend = false;
+                        bool defend;
+                        if (playerAction[act] == BattleAction.Defend && playerSelected[act] == enemyTarget[act])
+                            defend = true;
+                        else
+                            defend = false;
 
-                    enemyTarget[act].GetComponent<Unit_Info>().TakeDamage(enemySelected[act].GetComponent<Unit_Info>().attackDamage, defend);
+                        enemyTarget[act].GetComponent<Unit_Info>().TakeDamage(enemySelected[act].GetComponent<Unit_Info>().attackDamage, defend);
+                    }
                     break;
                 }
             case BattleAction.Defend:
