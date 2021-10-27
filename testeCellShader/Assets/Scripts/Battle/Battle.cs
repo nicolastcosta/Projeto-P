@@ -28,24 +28,7 @@ public class Battle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int a = 0; a <= 5; a++)
-        {
-            int rndAct = Random.Range(0, 100);
-            if (rndAct <= 75)
-            {
-                enemyAction[a] = BattleAction.Attack;
-
-                enemySelected[a] = enemyUnits[Random.Range(0, 3)];
-                enemyTarget[a] = playerUnits[Random.Range(0, 3)];
-            }
-            else
-            {
-                enemyAction[a] = BattleAction.Defend;
-                enemySelected[a] = enemyUnits[Random.Range(0, 3)];
-            }
-
-            enemyActionIcon[a].GetComponent<Action_Icons>().ChangeIcon(enemyAction[a]);
-        }
+        EnemyAI();
     }
 
     // Update is called once per frame
@@ -78,6 +61,7 @@ public class Battle : MonoBehaviour
         playerSelected[action].transform.GetChild(0).GetComponent<Select_Unit>().isSelected = false;
 
         playerActionIcon[action].GetComponent<Button>().interactable = true;
+        playerActionIcon[action].GetComponent<Action_Icons>().ChangeIcon(playerAction[action], playerSelected[action].GetComponent<Unit_Info>().unitColor, playerTarget[action].GetComponent<Unit_Info>().unitColor);
 
         if (action < 5)
         {
@@ -99,7 +83,7 @@ public class Battle : MonoBehaviour
         selecting = false;
         targeting = true;
         playerAction[action] = BattleAction.Attack;
-        playerActionIcon[action].GetComponent<Action_Icons>().ChangeIcon(playerAction[action]);
+        playerActionIcon[action].GetComponent<Action_Icons>().ChangeIcon(playerAction[action], playerSelected[action].GetComponent<Unit_Info>().unitColor, Color.white);
         commandCard.SetActive(false);
     }
 
@@ -110,7 +94,7 @@ public class Battle : MonoBehaviour
         playerSelected[action].transform.GetChild(0).GetComponent<Select_Unit>().isSelected = false;
 
         playerAction[action] = BattleAction.Defend;
-        playerActionIcon[action].GetComponent<Action_Icons>().ChangeIcon(playerAction[action]);
+        playerActionIcon[action].GetComponent<Action_Icons>().ChangeIcon(playerAction[action], playerSelected[action].GetComponent<Unit_Info>().unitColor, Color.white);
         commandCard.SetActive(false);
 
         playerActionIcon[action].GetComponent<Button>().interactable = true;
@@ -158,6 +142,8 @@ public class Battle : MonoBehaviour
         action = 0;
         selecting = true;
         targeting = false;
+
+        EnemyAI();
     }
 
     void PlayerAction(int act)
@@ -214,5 +200,70 @@ public class Battle : MonoBehaviour
                 }
         }
         enemyActionIcon[act].GetComponent<Action_Icons>().ResetIcon();
+    }
+
+    void EnemyAI()
+    {
+        for (int a = 0; a < 6; a++)
+        {
+            int rndAct = Random.Range(0, 100);
+            if (rndAct <= 75)
+            {
+                enemyAction[a] = BattleAction.Attack;
+
+                int selected = Random.Range(0, 3);
+                int target = Random.Range(0, 3);
+
+                enemySelected[a] = enemyUnits[selected];
+                enemyTarget[a] = playerUnits[target];
+
+                if (enemySelected[a].GetComponent<Unit_Info>().isDead == true)
+                {
+                    for (int s = 0; s < 3; s++)
+                    {
+                        if (enemyUnits[s].GetComponent<Unit_Info>().isDead == false)
+                        {
+                            enemySelected[a] = enemyUnits[s];
+                            break;
+                        }
+                    }
+                }
+
+                if (enemyTarget[a].GetComponent<Unit_Info>().isDead == true)
+                {
+                    for (int t = 0; t < 3; t++)
+                    {
+                        if (playerUnits[t].GetComponent<Unit_Info>().isDead == false)
+                        {
+                            enemyTarget[a] = playerUnits[t];
+                            break;
+                        }
+                    }
+                }
+
+                enemyActionIcon[a].GetComponent<Action_Icons>().ChangeIcon(enemyAction[a], enemySelected[a].GetComponent<Unit_Info>().unitColor, enemyTarget[a].GetComponent<Unit_Info>().unitColor);
+            }
+            else
+            {
+                enemyAction[a] = BattleAction.Defend;
+
+                int selected = Random.Range(0, 3);
+                enemySelected[a] = enemyUnits[selected];
+
+                if (enemySelected[a].GetComponent<Unit_Info>().isDead == true)
+                {
+                    for (int s = 0; s < 3; s++)
+                    {
+                        if (enemyUnits[s].GetComponent<Unit_Info>().isDead == false)
+                        {
+                            enemySelected[a] = enemyUnits[s];
+                            break;
+                        }
+                    }
+                }
+
+                enemyActionIcon[a].GetComponent<Action_Icons>().ChangeIcon(enemyAction[a], enemySelected[a].GetComponent<Unit_Info>().unitColor, Color.white);
+            }
+        }
     }
 }

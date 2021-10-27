@@ -30,6 +30,9 @@ public class Unit_Info : MonoBehaviour
     [HideInInspector]
     public GameObject nameTag;
 
+    [Header("Name")]
+    public Color unitColor;
+
     [Header("Life")]
     [Range(1, 500)]
     public int lifeMax = 1;
@@ -41,10 +44,10 @@ public class Unit_Info : MonoBehaviour
     public int armor = 0;
 
     [Header("Mana")]
-    [Range(0, 10)]
+    [Range(0, 250)]
     public int manaMax = 0;
 
-    [Range(0, 10)]
+    [Range(0, 250)]
     public int manaCur = 0;
 
     [Header("Movement")]
@@ -54,13 +57,15 @@ public class Unit_Info : MonoBehaviour
     [Range(100f, 720f)]
     public float turnRate = 720f;
 
-    [Header("Mapa")]
+    [Header("Map")]
     public GameObject minimapIcon;
 
     [Header("Combat")]
     public bool isInCombat, isDead;
 
     public int attackDamage;
+    public float critChance;
+    public float critDamageMult;
 
 
 
@@ -100,14 +105,20 @@ public class Unit_Info : MonoBehaviour
     {
         if (lifeCur > damageTanken)
         {
+            int damage = damageTanken;
+            float critChanceTemp = Random.Range(0, 100);
+
+            if (critChanceTemp <= critChance)
+                damage = ((int)(damageTanken * critDamageMult));
+
             if (isDefending == false)
             {
-                lifeCur -= damageTanken;
+                lifeCur -= damage;
                 animator.SetTrigger("damaged");
             }
             else
             {
-                lifeCur -= damageTanken / 2;
+                lifeCur -= damage / 2;
                 animator.SetTrigger("defend");
             }
         }
