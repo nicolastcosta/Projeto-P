@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit_Info : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Unit_Info : MonoBehaviour
     public Animator animator;
     
 
-    [Header("Name")]
+    [Header("-> Name <-")]
     public string unitName = "sem nome";
 
     [SerializeField]
@@ -30,10 +31,10 @@ public class Unit_Info : MonoBehaviour
     [HideInInspector]
     public GameObject nameTag;
 
-    [Header("Name")]
+    [Header("-> Unit Color Indicator <-")]
     public Color unitColor;
 
-    [Header("Life")]
+    [Header("-> Life <-")]
     [Range(1, 500)]
     public int lifeMax = 1;
 
@@ -43,30 +44,34 @@ public class Unit_Info : MonoBehaviour
     [Range(0, 10)]
     public int armor = 0;
 
-    [Header("Mana")]
+    [Header("-> Mana <-")]
     [Range(0, 250)]
     public int manaMax = 0;
 
     [Range(0, 250)]
     public int manaCur = 0;
 
-    [Header("Movement")]
+    [Header("-> Movement <-")]
     [Range(1, 10)]
     public float speed = 1f;
 
     [Range(100f, 720f)]
     public float turnRate = 720f;
 
-    [Header("Map")]
+    [Header("-> Map <-")]
     public GameObject minimapIcon;
 
-    [Header("Combat")]
+    [Header("-> Combat <-")]
     public bool isInCombat, isDead;
 
+    [Header("-> Basic Attack <-")]
     public int attackDamage;
     public float critChance;
     public float critDamageMult;
 
+    [Header("-> UI <-")]
+    public GameObject selectIcon;
+    public Slider lifeBar;
 
 
 
@@ -98,7 +103,8 @@ public class Unit_Info : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        lifeBar.maxValue = lifeMax;
+        lifeBar.value = lifeCur;
     }
 
     public void TakeDamage(int damageTanken, bool isDefending)

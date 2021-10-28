@@ -30,13 +30,12 @@ public class Select_Unit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ao clicar e estiver com o mouse em cima do objeto vai selecionar e mandar a informacao para o battle system
+        //Ao clicar e estiver com o mouse em cima do objeto vai selecionar e mandar a informacao para o battle system
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (hover != null && battleSystem.GetComponent<Battle>().selecting == true && tag == "Player")
             {
                 isSelected = true;
-                rend.material.color = Color.green;
                 battleSystem.GetComponent<Battle>().SelectUnit(host);
             }
             else if (hover != null && battleSystem.GetComponent<Battle>().targeting == true && tag == "Enemy")
@@ -46,7 +45,7 @@ public class Select_Unit : MonoBehaviour
         }
     }
 
-    //passar o mouse em cima muda a cor e fala que pode selecionar o objeto hover caso nao esteja selecionado
+    //Passar o mouse em cima muda a cor e fala que pode selecionar o objeto hover caso nao esteja selecionado
     private void OnMouseEnter()
     {
         
@@ -58,7 +57,7 @@ public class Select_Unit : MonoBehaviour
                     {
                         if (battleSystem.GetComponent<Battle>().selecting == true)
                         {
-                            rend.material.color = Color.yellow;
+                            host.GetComponent<Unit_Info>().selectIcon.SetActive(true);
                             hover = gameObject;
                         }
                         break;
@@ -67,7 +66,7 @@ public class Select_Unit : MonoBehaviour
                     {
                         if (battleSystem.GetComponent<Battle>().targeting == true)
                         {
-                            rend.material.color = Color.yellow;
+                            host.GetComponent<Unit_Info>().selectIcon.SetActive(true);
                             hover = gameObject;
                         }
                         break;
@@ -81,6 +80,7 @@ public class Select_Unit : MonoBehaviour
     {
         if(isSelected == false)
         {
+            host.GetComponent<Unit_Info>().selectIcon.SetActive(false);
             rend.material.color = col;
             hover = null;
         }
