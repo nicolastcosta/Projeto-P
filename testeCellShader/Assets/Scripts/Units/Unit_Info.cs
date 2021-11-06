@@ -62,6 +62,7 @@ public class Unit_Info : MonoBehaviour
     public GameObject minimapIcon;
 
     [Header("-> Combat <-")]
+    public GameObject battleSystem;
     public bool isInCombat, isDead;
 
     [Header("-> Basic Attack <-")]

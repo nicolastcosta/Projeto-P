@@ -18,6 +18,7 @@ public class Battle : MonoBehaviour
     [SerializeField]
     private int maxActions;
     public int curAction;
+    public int curMov;
 
     [Header("-> Units <-")]
     [SerializeField]
@@ -47,7 +48,7 @@ public class Battle : MonoBehaviour
 
     [Header("-> Battle States <-")]
     public bool selecting = true;
-    public bool targeting;
+    public bool targeting, isInBattle;
 
     [Header("-> UI Elements <-")]
     [SerializeField]
@@ -55,9 +56,6 @@ public class Battle : MonoBehaviour
 
     [SerializeField]
     private GameObject battleButton;
-
-    public float timeToWait;
-    private float timeOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -113,7 +111,7 @@ public class Battle : MonoBehaviour
         playerTarget[curAction].GetComponent<Unit_Info>().selectIcon.SetActive(false);
 
         //Libera o botão para alterar a ação caso tenha errado
-        playerActionIcon[curAction].GetComponent<Button>().interactable = true;
+        //playerActionIcon[curAction].GetComponent<Button>().interactable = true;
 
         //Mostra o alvo que vai sofrer a ação no icone
         playerActionIcon[curAction].GetComponent<Action_Icons>().ChangeIcon(playerAction[curAction], playerSelected[curAction].GetComponent<Unit_Info>().unitColor, playerTarget[curAction].GetComponent<Unit_Info>().unitColor);
@@ -140,7 +138,7 @@ public class Battle : MonoBehaviour
     {
         //Seleciona a unidade e limpa o indicador de seleção
         playerSelected[curAction].transform.GetChild(0).GetComponent<Select_Unit>().hover = null;
-        playerSelected[curAction].transform.GetChild(0).GetComponent<Select_Unit>().rend.material.color = playerSelected[curAction].transform.GetChild(0).GetComponent<Select_Unit>().col;
+        playerSelected[curAction].GetComponent<Unit_Info>().selectIcon.SetActive(false);
         playerSelected[curAction].transform.GetChild(0).GetComponent<Select_Unit>().isSelected = false;
 
         //Seleciona a ação e altera os icones
@@ -149,7 +147,7 @@ public class Battle : MonoBehaviour
         commandCard.SetActive(false);
 
         //Libera o botão para alterar a ação caso tenha errado
-        playerActionIcon[curAction].GetComponent<Button>().interactable = true;
+        //playerActionIcon[curAction].GetComponent<Button>().interactable = true;
 
         //Pula para a proxima ação caso ainda falte
         if (curAction < maxActions-1)
@@ -171,52 +169,72 @@ public class Battle : MonoBehaviour
     //Ao clicar no botão de batalha inicia o combate
     public void StartBattle()
     {
-        StartCoroutine(Actions());
+        isInBattle = true;
+        curAction = 0;
+        Actions();
     }
 
     //Faz as ações com timers para as ações.
-    IEnumerator Actions()
+    public void Actions()
     {
-        for (int a = 0; a < maxActions; a++)
+        
+        if (curAction == maxActions && curMov == maxActions * 2)
         {
-            if (playerSelected[a].GetComponent<Unit_Info>().isDead == false)
-            {
-                PlayerAction(a);
-                if (enemyAction[a] != BattleAction.Defend)
-                    yield return new WaitForSeconds(2.5f);
-            }
-            playerActionIcon[a].GetComponent<Action_Icons>().ResetIcon();
+            isInBattle = false;
 
-            if (enemySelected[a].GetComponent<Unit_Info>().isDead == false)
-            {
-                EnemyAction(a);
-                if (playerAction[a] != BattleAction.Defend)
-                    yield return new WaitForSeconds(2.5f);
-            }
-            enemyActionIcon[a].GetComponent<Action_Icons>().ResetIcon();
+            //Ações do inimigo
+            EnemyAI();
+
+            //Final do turno
+            curMov = 0;
+            curAction = 0;
+            selecting = true;
+            targeting = false;
         }
 
-        //Final do turno
-        curAction = 0;
-        selecting = true;
-        targeting = false;
+        if (isInBattle == true)
+        {
+            curMov++;
+            //Compara se é impar ou par para ver de quem é o turno
+            if (curMov % 2 != 0)
+            {
+                if (playerSelected[curAction].GetComponent<Unit_Info>().isDead == false)
+                {
+                    PlayerAction(curAction);
+                }
+                else
+                {
+                    StartCoroutine(DeadActions());
+                }
+            }
+            // Inimigo
+            else
+            {
+                curAction++;
 
-        //Ações do inimigo
-        EnemyAI();
+                if (enemySelected[curAction - 1].GetComponent<Unit_Info>().isDead == false)
+                {
+                    EnemyAction(curAction - 1);
+                }
+                else
+                {
+                    StartCoroutine(DeadActions());
+                }
+            }
+        }
+        
     }
 
-    void MyTemporizer()
+    IEnumerator DeadActions()
     {
-
-        if(Time.time > timeOffset)
-        {
-            timeOffset = timeToWait + Time.time;
-
-        }
+        yield return new WaitForSeconds(0.5f);
+        Actions();
     }
 
     void PlayerAction(int act)
     {
+        playerActionIcon[act].GetComponent<Action_Icons>().ResetIcon();
+
         switch (playerAction[act])
         {
             case BattleAction.Attack:
@@ -238,6 +256,7 @@ public class Battle : MonoBehaviour
                 }
             case BattleAction.Defend:
                 {
+                    Actions();
                     break;
                 }
         }
@@ -245,6 +264,8 @@ public class Battle : MonoBehaviour
 
     void EnemyAction(int act)
     {
+        enemyActionIcon[act].GetComponent<Action_Icons>().ResetIcon();
+
         switch (enemyAction[act])
         {
             case BattleAction.Attack:
@@ -265,6 +286,7 @@ public class Battle : MonoBehaviour
                 }
             case BattleAction.Defend:
                 {
+                    Actions();
                     break;
                 }
         }

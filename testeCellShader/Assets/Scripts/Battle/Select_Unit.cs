@@ -10,8 +10,7 @@ public class Select_Unit : MonoBehaviour
     [HideInInspector]
     public Renderer rend;
 
-    [SerializeField]
-    private GameObject host;
+    public GameObject host;
 
     [HideInInspector]
     public GameObject hover;
