@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
+using TMPro;
 
 public class Unit_Info : MonoBehaviour
 {
@@ -11,7 +13,9 @@ public class Unit_Info : MonoBehaviour
     //o animator que o modelo carrega
     [HideInInspector]
     public Animator animator;
-    
+    [HideInInspector]
+    public NavMeshAgent navMesh;
+
 
     [Header("-> Name <-")]
     public string unitName = "sem nome";
@@ -69,16 +73,26 @@ public class Unit_Info : MonoBehaviour
     public int attackDamage;
     public float critChance;
     public float critDamageMult;
+    public float critScaling;
 
     [Header("-> UI <-")]
     public GameObject selectIcon;
-    public Slider lifeBar;
 
+    [SerializeField]
+    private Slider lifeBar;
+
+    [SerializeField]
+    private GameObject damageIndicator;
+
+    private Quaternion initialRotation;
 
 
     void Awake()
     {
         animator = model.GetComponent<Animator>();
+        navMesh = GetComponent<NavMeshAgent>();
+
+        initialRotation = transform.rotation;
 
         if (hasNameTag == true)
         {
@@ -104,16 +118,30 @@ public class Unit_Info : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lifeBar.maxValue = lifeMax;
-        lifeBar.value = lifeCur;
+        if (isInCombat)
+        {
+            lifeBar.maxValue = lifeMax;
+            lifeBar.value = lifeCur;
+            //if(rm >= sd-offset || rm <= sd+offest)
+            //Debug.Log("Remaining distace: " + navMesh.remainingDistance);
+            //Debug.Log("Stop distace: " + navMesh.stoppingDistance);
+            if (navMesh.remainingDistance == navMesh.stoppingDistance)
+            {
+                Quaternion angle = Quaternion.RotateTowards(transform.rotation, initialRotation, turnRate * Time.deltaTime);
+                transform.rotation = angle;
+                animator.SetBool("move", false);
+                //Debug.Log("Update current action: " + battleSystem.GetComponent<Battle>().curAction);
+            }
+        }
     }
 
     public void TakeDamage(int damageTanken, bool isDefending)
     {
+        float critChanceTemp = Random.Range(0, 100);
+
         if (lifeCur > damageTanken)
         {
             int damage = damageTanken;
-            float critChanceTemp = Random.Range(0, 100);
 
             if (critChanceTemp <= critChance)
                 damage = ((int)(damageTanken * critDamageMult));
@@ -121,19 +149,24 @@ public class Unit_Info : MonoBehaviour
             if (isDefending == false)
             {
                 lifeCur -= damage;
+                damageIndicator.GetComponent<TextMeshProUGUI>().text = damage.ToString();
                 animator.SetTrigger("damaged");
             }
             else
             {
                 lifeCur -= damage / 2;
+                damageIndicator.GetComponent<TextMeshProUGUI>().text = (damage/2).ToString();
                 animator.SetTrigger("defend");
             }
         }
         else
         {
+            damageIndicator.GetComponent<TextMeshProUGUI>().text = damageTanken.ToString();
             animator.SetBool("dead", true);
             lifeCur = 0;
             isDead = true;
         }
+
+        damageIndicator.GetComponent<Animator>().SetTrigger("PopUp");
     }
 }

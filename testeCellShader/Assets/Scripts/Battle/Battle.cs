@@ -3,20 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleAction
-{
-    None,
-    Attack,
-    Defend,
-    Move,
-    Spell
-}
-
 public class Battle : MonoBehaviour
 {
     [Header("-> Actions per Turn <-")]
     [SerializeField]
-    private int maxActions;
+    public int maxActions;
     public int curAction;
     public int curMov;
 
@@ -30,8 +21,7 @@ public class Battle : MonoBehaviour
     [Header("-> Player Actions <-")]
     public BattleAction[] playerAction;
 
-    [SerializeField]
-    private GameObject[] playerSelected, playerTarget;
+    public GameObject[] playerSelected, playerTarget;
 
     [Header("-> Enemy Actions <-")]
     public BattleAction[] enemyAction;
@@ -47,8 +37,8 @@ public class Battle : MonoBehaviour
     private GameObject[] enemyActionIcon;
 
     [Header("-> Battle States <-")]
-    public bool selecting = true;
-    public bool targeting, isInBattle;
+    public bool selectingPlayer = true;
+    public bool targetingEnemy, targetingPlayer, isInBattle;
 
     [Header("-> UI Elements <-")]
     [SerializeField]
@@ -91,8 +81,9 @@ public class Battle : MonoBehaviour
     public void AttackButton()
     {
         //Libera a seleção de inimigos
-        selecting = false;
-        targeting = true;
+        selectingPlayer = false;
+        targetingEnemy = true;
+        targetingPlayer = false;
 
         //Seleciona a ação e altera os icones
         playerAction[curAction] = BattleAction.Attack;
@@ -101,7 +92,7 @@ public class Battle : MonoBehaviour
     }
 
     //Jogador seleciona uma unidade inimiga caso a ação necessite
-    public void SelectTarget(GameObject unit)
+    public void SelectTargetEnemy (GameObject unit)
     {
         //Seleciona a unidade e limpa o indicador de seleção
         playerTarget[curAction] = unit;
@@ -110,23 +101,22 @@ public class Battle : MonoBehaviour
         playerSelected[curAction].GetComponent<Unit_Info>().selectIcon.SetActive(false);
         playerTarget[curAction].GetComponent<Unit_Info>().selectIcon.SetActive(false);
 
-        //Libera o botão para alterar a ação caso tenha errado
-        //playerActionIcon[curAction].GetComponent<Button>().interactable = true;
-
         //Mostra o alvo que vai sofrer a ação no icone
         playerActionIcon[curAction].GetComponent<Action_Icons>().ChangeIcon(playerAction[curAction], playerSelected[curAction].GetComponent<Unit_Info>().unitColor, playerTarget[curAction].GetComponent<Unit_Info>().unitColor);
 
         //Pula para a proxima ação caso ainda falte
         if (curAction < maxActions-1)
         {
-            selecting = true;
-            targeting = false;
+            selectingPlayer = true;
+            targetingEnemy = false;
+            targetingPlayer = false;
             curAction++;
         }
         else if (curAction == maxActions-1)
         {
-            selecting = false;
-            targeting = false;
+            selectingPlayer = false;
+            targetingEnemy = false;
+            targetingPlayer = false;
 
             //Debloqueia o botão de iniciar o combate caso tenha preenchido todas ações do turno
             battleButton.GetComponent<Button>().interactable = true;
@@ -146,20 +136,68 @@ public class Battle : MonoBehaviour
         playerActionIcon[curAction].GetComponent<Action_Icons>().ChangeIcon(playerAction[curAction], playerSelected[curAction].GetComponent<Unit_Info>().unitColor, Color.white);
         commandCard.SetActive(false);
 
-        //Libera o botão para alterar a ação caso tenha errado
-        //playerActionIcon[curAction].GetComponent<Button>().interactable = true;
 
         //Pula para a proxima ação caso ainda falte
         if (curAction < maxActions-1)
         {
-            selecting = true;
-            targeting = false;
+            selectingPlayer = true;
+            targetingEnemy = false;
+            targetingPlayer = false;
             curAction++;
         }
         else if (curAction == maxActions-1)
         {
-            selecting = false;
-            targeting = false;
+            selectingPlayer = false;
+            targetingEnemy = false;
+            targetingPlayer = false;
+
+            //Debloqueia o botão de iniciar o combate caso tenha preenchido todas ações do turno
+            battleButton.GetComponent<Button>().interactable = true;
+        }
+    }
+
+    public void MoveButton()
+    {
+        //Libera a seleção de inimigos
+        selectingPlayer = false;
+        targetingPlayer = false;
+        targetingPlayer = true;
+
+        playerSelected[curAction].transform.GetChild(0).GetComponent<Select_Unit>().hover = null;
+        playerSelected[curAction].GetComponent<Unit_Info>().selectIcon.SetActive(true);
+        playerSelected[curAction].transform.GetChild(0).GetComponent<Select_Unit>().isSelected = true;
+
+        //Seleciona a ação e altera os icones
+        playerAction[curAction] = BattleAction.Move;
+        playerActionIcon[curAction].GetComponent<Action_Icons>().ChangeIcon(playerAction[curAction], playerSelected[curAction].GetComponent<Unit_Info>().unitColor, Color.white);
+        commandCard.SetActive(false);
+    }
+
+    public void SelectTargetPlayer (GameObject unit)
+    {
+        //Seleciona a unidade e limpa o indicador de seleção
+        playerTarget[curAction] = unit;
+        playerTarget[curAction].transform.GetChild(0).GetComponent<Select_Unit>().hover = null;
+        playerSelected[curAction].transform.GetChild(0).GetComponent<Select_Unit>().isSelected = false;
+        playerSelected[curAction].GetComponent<Unit_Info>().selectIcon.SetActive(false);
+        playerTarget[curAction].GetComponent<Unit_Info>().selectIcon.SetActive(false);
+
+        //Mostra o alvo que vai sofrer a ação no icone
+        playerActionIcon[curAction].GetComponent<Action_Icons>().ChangeIcon(playerAction[curAction], playerSelected[curAction].GetComponent<Unit_Info>().unitColor, playerTarget[curAction].GetComponent<Unit_Info>().unitColor);
+
+        //Pula para a proxima ação caso ainda falte
+        if (curAction < maxActions - 1)
+        {
+            selectingPlayer = true;
+            targetingEnemy = false;
+            targetingPlayer = false;
+            curAction++;
+        }
+        else if (curAction == maxActions - 1)
+        {
+            selectingPlayer = false;
+            targetingEnemy = false;
+            targetingPlayer = false;
 
             //Debloqueia o botão de iniciar o combate caso tenha preenchido todas ações do turno
             battleButton.GetComponent<Button>().interactable = true;
@@ -174,12 +212,13 @@ public class Battle : MonoBehaviour
         Actions();
     }
 
-    //Faz as ações com timers para as ações.
+    //Caso seja impar vai fazer as ações do inimigo, caso seja par vai fazer as do jogador e caso esteja no maximo bloqueia as ações para fazer o proximo turno
     public void Actions()
     {
         
         if (curAction == maxActions && curMov == maxActions * 2)
         {
+            Debug.Log("No actions nor moves");
             isInBattle = false;
 
             //Ações do inimigo
@@ -188,23 +227,39 @@ public class Battle : MonoBehaviour
             //Final do turno
             curMov = 0;
             curAction = 0;
-            selecting = true;
-            targeting = false;
+            selectingPlayer = true;
+            targetingEnemy = false;
+            targetingPlayer = false;
         }
 
         if (isInBattle == true)
         {
+            Debug.Log("Battling");
             curMov++;
             //Compara se é impar ou par para ver de quem é o turno
             if (curMov % 2 != 0)
             {
+                Debug.Log("Player turn");
+                for (int u = 0; u < playerUnits.Length; u++)
+                {
+                    if (playerUnits[u].GetComponent<Unit_Info>().isDead == false)
+                    {
+                        playerUnits[u].GetComponent<Unit_Info>().critChance += playerUnits[u].GetComponent<Unit_Info>().critScaling;
+
+                        if (playerUnits[u].GetComponent<Unit_Info>().critChance > 100)
+                            playerUnits[u].GetComponent<Unit_Info>().critChance = 100;
+                    }
+                }
+
                 if (playerSelected[curAction].GetComponent<Unit_Info>().isDead == false)
                 {
+                    Debug.Log("PLayer doing Actions");
                     PlayerAction(curAction);
                 }
                 else
                 {
-                    StartCoroutine(DeadActions());
+                    Debug.Log("Player dead");
+                    DeadActions();
                 }
             }
             // Inimigo
@@ -218,16 +273,15 @@ public class Battle : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(DeadActions());
+                    DeadActions();
                 }
             }
         }
         
     }
 
-    IEnumerator DeadActions()
+    void DeadActions()
     {
-        yield return new WaitForSeconds(0.5f);
         Actions();
     }
 
@@ -254,9 +308,23 @@ public class Battle : MonoBehaviour
                     }
                     break;
                 }
+
             case BattleAction.Defend:
                 {
                     Actions();
+                    break;
+                }
+
+            case BattleAction.Move:
+                {
+                    playerSelected[act].GetComponent<Unit_Info>().navMesh.SetDestination(playerTarget[act].transform.position);
+                    playerTarget[act].GetComponent<Unit_Info>().navMesh.SetDestination(playerSelected[act].transform.position);
+
+                    playerSelected[act].GetComponent<Unit_Info>().critChance -= 20;
+                    playerTarget[act].GetComponent<Unit_Info>().critChance -= 20;
+
+                    playerSelected[act].GetComponent<Unit_Info>().animator.SetBool("move", true);
+                    playerTarget[act].GetComponent<Unit_Info>().animator.SetBool("move", true);
                     break;
                 }
         }
@@ -284,6 +352,7 @@ public class Battle : MonoBehaviour
                     }
                     break;
                 }
+
             case BattleAction.Defend:
                 {
                     Actions();

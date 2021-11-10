@@ -7,54 +7,45 @@ public class Select_Unit : MonoBehaviour
     [SerializeField]
     private GameObject battleSystem;
 
-    [HideInInspector]
-    public Renderer rend;
-
     public GameObject host;
 
     [HideInInspector]
     public GameObject hover;
     public bool isSelected;
 
-    [HideInInspector]
-    public Color col;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rend = GetComponent<MeshRenderer>();
-        col = rend.material.color;
-    }
-
     // Update is called once per frame
     void Update()
     {
-        //Ao clicar e estiver com o mouse em cima do objeto vai selecionar e mandar a informacao para o battle system
+        // Ao clicar e estiver com o mouse em cima do objeto vai selecionar e mandar a informacao para o battle system
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (hover != null && battleSystem.GetComponent<Battle>().selecting == true && tag == "Player")
+            if (hover != null && battleSystem.GetComponent<New_Battle_System>().playerIsSelecting == true && tag == "Player")
             {
                 isSelected = true;
-                battleSystem.GetComponent<Battle>().SelectUnit(host);
+                battleSystem.GetComponent<New_Battle_System>().SelectUnit(host);
             }
-            else if (hover != null && battleSystem.GetComponent<Battle>().targeting == true && tag == "Enemy")
+            else if (hover != null && battleSystem.GetComponent<New_Battle_System>().playerIsTargetingEnemy == true && tag == "Enemy")
             {
-                battleSystem.GetComponent<Battle>().SelectTarget(host);
+                battleSystem.GetComponent<New_Battle_System>().SelectTargetEnemy(host);
             }
+            /*else if (hover != null && battleSystem.GetComponent<New_Battle_System>().playerIsTargetingSelf == true && tag == "Player")
+            {
+                battleSystem.GetComponent<New_Battle_System>().SelectTargetPlayer(host);
+            }*/
         }
     }
 
-    //Passar o mouse em cima muda a cor e fala que pode selecionar o objeto hover caso nao esteja selecionado
+    // Passar o mouse em cima muda a cor e fala que pode selecionar o objeto hover caso nao esteja selecionado
     private void OnMouseEnter()
     {
         
-            if (isSelected == false)
+            if (isSelected == false && host.GetComponent<Unit_Info>().isDead == false)
             {
                 switch (tag)
                 {
                     case "Player":
                     {
-                        if (battleSystem.GetComponent<Battle>().selecting == true)
+                        if (battleSystem.GetComponent<New_Battle_System>().playerIsSelecting == true || battleSystem.GetComponent<Battle>().targetingPlayer == true)
                         {
                             host.GetComponent<Unit_Info>().selectIcon.SetActive(true);
                             hover = gameObject;
@@ -63,7 +54,7 @@ public class Select_Unit : MonoBehaviour
                     }
                     case "Enemy":
                     {
-                        if (battleSystem.GetComponent<Battle>().targeting == true)
+                        if (battleSystem.GetComponent<New_Battle_System>().playerIsTargetingEnemy == true)
                         {
                             host.GetComponent<Unit_Info>().selectIcon.SetActive(true);
                             hover = gameObject;
@@ -80,7 +71,6 @@ public class Select_Unit : MonoBehaviour
         if(isSelected == false)
         {
             host.GetComponent<Unit_Info>().selectIcon.SetActive(false);
-            rend.material.color = col;
             hover = null;
         }
     }

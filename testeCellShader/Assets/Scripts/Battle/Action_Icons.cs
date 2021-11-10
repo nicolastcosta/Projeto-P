@@ -35,12 +35,20 @@ public class Action_Icons : MonoBehaviour
                     targetIcon.SetActive(false);
                     break;
                 }
+
+            case BattleAction.Move:
+                {
+                    icon.sprite = actionIcons[2];
+                    targetIcon.SetActive(true);
+                    targetIcon.GetComponent<Image>().color = targetColor;
+                    break;
+                }
         }
     }
 
     public void ResetIcon()
     {
-        icon.sprite = actionIcons[2];
+        icon.sprite = actionIcons[3];
         icon.color = Color.white;
         targetIcon.SetActive(false);
     }
