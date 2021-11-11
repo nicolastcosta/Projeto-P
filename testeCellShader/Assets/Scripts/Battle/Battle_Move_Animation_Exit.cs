@@ -24,7 +24,9 @@ public class Battle_Move_Animation_Exit : StateMachineBehaviour
 
         int curAction = battleSystem.GetComponent<New_Battle_System>().currentAction;
 
-        if (modelHost.GetComponent<Unit_Info>().unitPos == battleSystem.GetComponent<New_Battle_System>().selecteds[curAction -1])
+
+
+        if (modelHost.GetComponent<Unit_Info>().unitPos == battleSystem.GetComponent<New_Battle_System>().targets[curAction -1])
             battleSystem.GetComponent<New_Battle_System>().Actions(curAction);
 
     }

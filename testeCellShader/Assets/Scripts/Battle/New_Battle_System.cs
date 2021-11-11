@@ -296,17 +296,17 @@ public class New_Battle_System : MonoBehaviour
                             selecteds[action].GetComponent<Select_Unit>().unitInPos.transform.position = targets[action].GetComponent<Select_Unit>().unitInPos.transform.position;
                             targets[action].GetComponent<Select_Unit>().unitInPos.transform.position = transTemp;
 
-                            // Change the position reference
-                            GameObject unitTemp = selecteds[action];
-                            selecteds[action] = targets[action];
-                            targets[action] = unitTemp;
-
                             // Change the targets
                             GameObject posTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos;
                             selecteds[action].GetComponent<Select_Unit>().unitInPos = targets[action].GetComponent<Select_Unit>().unitInPos;
                             targets[action].GetComponent<Select_Unit>().unitInPos = posTemp;
 
-                            Debug.Log("Unit " + selecteds[action].GetComponent<Select_Unit>().unitInPos.name + "is in " + selecteds[action].name);
+                            // Change the position reference
+                            GameObject unitTemp = selecteds[action];
+                            selecteds[action] = targets[action];
+                            targets[action] = unitTemp;
+
+                            Debug.Log("Unit " + targets[action].GetComponent<Select_Unit>().unitInPos.name + " is in " + targets[action].name);
                             break;
                         }
                 }
