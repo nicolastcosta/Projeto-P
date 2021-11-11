@@ -22,10 +22,12 @@ public class Attack_Animation_Exit : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameObject modelHost = animator.gameObject.GetComponent<Select_Unit>().host;
+        GameObject modelHost = animator.gameObject.transform.parent.gameObject;
         GameObject battleSystem = modelHost.GetComponent<Unit_Info>().battleSystem;
 
-        battleSystem.GetComponent<Battle>().Actions();
+        int curAction = battleSystem.GetComponent<New_Battle_System>().currentAction;
+
+        battleSystem.GetComponent<New_Battle_System>().Actions(curAction);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -19,22 +19,14 @@ public class Battle_Move_Animation_Exit : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {   
-        GameObject modelHost = animator.gameObject.GetComponent<Select_Unit>().host;
+        GameObject modelHost = animator.gameObject.transform.parent.gameObject;
         GameObject battleSystem = modelHost.GetComponent<Unit_Info>().battleSystem;
-        Debug.Log("Animation current action: " +battleSystem.GetComponent<Battle>().curAction);
 
-        if(battleSystem.GetComponent<Battle>().curAction < battleSystem.GetComponent<Battle>().maxActions)
-        {
-            if (modelHost == battleSystem.GetComponent<Battle>().playerSelected[battleSystem.GetComponent<Battle>().curAction])
-            {
-                battleSystem.GetComponent<Battle>().Actions();
-            }
-        }
-        else
-        {
-            animator.SetBool("move", false);
-        }
-        
+        int curAction = battleSystem.GetComponent<New_Battle_System>().currentAction;
+
+        if (modelHost.GetComponent<Unit_Info>().unitPos == battleSystem.GetComponent<New_Battle_System>().selecteds[curAction -1])
+            battleSystem.GetComponent<New_Battle_System>().Actions(curAction);
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -35,9 +35,6 @@ public class Unit_Info : MonoBehaviour
     [HideInInspector]
     public GameObject nameTag;
 
-    [Header("-> Unit Color Indicator <-")]
-    public Color unitColor;
-
     [Header("-> Life <-")]
     [Range(1, 500)]
     public int lifeMax = 1;
@@ -68,6 +65,7 @@ public class Unit_Info : MonoBehaviour
     [Header("-> Combat <-")]
     public GameObject battleSystem;
     public bool isInCombat, isDead;
+    public GameObject unitPos;
 
     [Header("-> Basic Attack <-")]
     public int attackDamage;
@@ -101,7 +99,6 @@ public class Unit_Info : MonoBehaviour
                 nameTag = Instantiate(nameTagPrefab, transform.position, Quaternion.identity) as GameObject;
                 nameTag.transform.parent = transform;
                 nameTag.GetComponent<Name_Tag>().SetAttributes(unitName, nameTagOffset);
-
             }
             else
                 Debug.Log("Error to create Name Tag");
@@ -122,16 +119,6 @@ public class Unit_Info : MonoBehaviour
         {
             lifeBar.maxValue = lifeMax;
             lifeBar.value = lifeCur;
-            //if(rm >= sd-offset || rm <= sd+offest)
-            //Debug.Log("Remaining distace: " + navMesh.remainingDistance);
-            //Debug.Log("Stop distace: " + navMesh.stoppingDistance);
-            if (navMesh.remainingDistance == navMesh.stoppingDistance)
-            {
-                Quaternion angle = Quaternion.RotateTowards(transform.rotation, initialRotation, turnRate * Time.deltaTime);
-                transform.rotation = angle;
-                animator.SetBool("move", false);
-                //Debug.Log("Update current action: " + battleSystem.GetComponent<Battle>().curAction);
-            }
         }
     }
 
