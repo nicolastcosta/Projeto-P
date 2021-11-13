@@ -15,6 +15,7 @@ public enum BattleAction
 public class New_Battle_System : MonoBehaviour
 {
     public int currentTurn;
+    public float timer;
     
     [Header("-> Turn Actions <-")]
     public int maximumActions;
@@ -49,6 +50,12 @@ public class New_Battle_System : MonoBehaviour
     {
         // First Enemy actions
         EnemyAI();
+    }
+
+    // Update
+    private void Update()
+    {
+        NoActionTimer();
     }
 
     // Select player unit to order a action
@@ -205,6 +212,8 @@ public class New_Battle_System : MonoBehaviour
 
     public void Actions(int action)
     {
+        timer = 0;
+
         if (action < maximumActions)
         {
             currentAction++;
@@ -306,6 +315,12 @@ public class New_Battle_System : MonoBehaviour
                             selecteds[action] = targets[action];
                             targets[action] = unitTemp;
 
+                            //Reduces the crit change
+                            selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance -= 14;
+
+                            if (selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance < 0)
+                                selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance = 0;
+
                             Debug.Log("Unit " + targets[action].GetComponent<Select_Unit>().unitInPos.name + " is in " + targets[action].name);
                             break;
                         }
@@ -321,6 +336,20 @@ public class New_Battle_System : MonoBehaviour
     void NoAction()
     {
         Actions(currentAction);
+    }
+
+    // Time controller that keep the game going if has no actions left and still is in combat
+    void NoActionTimer()
+    {
+        if (timer >= 3 && isInBattle == true)
+        {
+            timer = 0;
+            Actions(currentAction);
+        }
+        else if (timer < 5 && isInBattle == true)
+        {
+            timer += 1 * Time.deltaTime;
+        }
     }
 
     void EnemyAI()

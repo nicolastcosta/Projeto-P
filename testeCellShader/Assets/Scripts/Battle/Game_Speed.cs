@@ -52,7 +52,7 @@ public class Game_Speed : MonoBehaviour
 
         for (int u = 0; u < units.Length; u++)
         {
-            units[u].GetComponent<Unit_Info>().animator.SetFloat("animationSpeed", gameSpeed);
+            units[u].GetComponent<Animator>().SetFloat("animationSpeed", gameSpeed);
         }
     }
 
@@ -77,7 +77,7 @@ public class Game_Speed : MonoBehaviour
 
         for (int u = 0; u < units.Length; u++)
         {
-            units[u].GetComponent<Unit_Info>().animator.SetFloat("animationSpeed", gameSpeed);
+            units[u].GetComponent<Animator>().SetFloat("animationSpeed", gameSpeed);
         }
     }
 }
