@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Button_Open_Panel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject panel;
 
-    // Update is called once per frame
-    void Update()
+    // Disable or enable the panel
+    public void ButtonInteraction()
     {
-        
+        if (panel.activeSelf == false)
+            panel.SetActive(true);
+        else
+            panel.SetActive(false);
     }
 }

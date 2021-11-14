@@ -13,6 +13,12 @@ public class Action_Icons : MonoBehaviour
     private Sprite[] actionIcons;
 
     private bool hasAction;
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void ChangeIcon(BattleAction action, Color unitColor, Color targetColor)
     {
@@ -22,10 +28,13 @@ public class Action_Icons : MonoBehaviour
         {
             case BattleAction.Attack:
                 {
-                    icon.sprite = actionIcons[0];
-
                     targetIcon.SetActive(true);
                     targetIcon.GetComponent<Image>().color = targetColor;
+
+                    if (icon.sprite != actionIcons[0])
+                        animator.Play("New");
+
+                    icon.sprite = actionIcons[0];
                     break;
                 }
 
@@ -33,14 +42,20 @@ public class Action_Icons : MonoBehaviour
                 {
                     icon.sprite = actionIcons[1];
                     targetIcon.SetActive(false);
+
+                    animator.Play("New");
                     break;
                 }
 
             case BattleAction.Move:
                 {
-                    icon.sprite = actionIcons[2];
                     targetIcon.SetActive(true);
                     targetIcon.GetComponent<Image>().color = targetColor;
+
+                    if (icon.sprite != actionIcons[2])
+                        animator.Play("New");
+
+                    icon.sprite = actionIcons[2];
                     break;
                 }
         }
@@ -51,5 +66,12 @@ public class Action_Icons : MonoBehaviour
         icon.sprite = actionIcons[3];
         icon.color = Color.white;
         targetIcon.SetActive(false);
+
+        animator.Play("New");
+    }
+
+    public void HideIcon()
+    {
+        animator.Play("Use");
     }
 }

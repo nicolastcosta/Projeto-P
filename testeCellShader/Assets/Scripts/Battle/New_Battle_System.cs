@@ -72,7 +72,7 @@ public class New_Battle_System : MonoBehaviour
         selecteds[currentAction] = unitPosition;
         selecteds[currentAction].GetComponent<Select_Unit>().hover = null;
 
-        // Ativa o painel de comandos da unidade selecionada
+        // Activates the player commandcard
         commandCard.SetActive(true);
     }
 
@@ -217,16 +217,13 @@ public class New_Battle_System : MonoBehaviour
         if (action < maximumActions)
         {
             currentAction++;
-            actionIcon[action].GetComponent<Action_Icons>().ResetIcon();
+            actionIcon[action].GetComponent<Action_Icons>().HideIcon();
         }
 
         if (action == maximumActions)
         {
             Debug.Log("End Battle");
             isInBattle = false;
-
-            // Enemy actions
-            EnemyAI();
 
             // Reset player actions
             currentAction = 0;
@@ -237,9 +234,17 @@ public class New_Battle_System : MonoBehaviour
                 targets[a] = null;
             }
 
+            for (int a = 0; a < maximumActions; a++)
+            {
+                actionIcon[a].GetComponent<Action_Icons>().ResetIcon();
+            }
+
             playerIsSelecting = true;
             playerIsTargetingEnemy = false;
             playerIsTargetingSelf = false;
+
+            // Enemy actions
+            EnemyAI();
         }
 
         if (isInBattle == true)
@@ -316,12 +321,15 @@ public class New_Battle_System : MonoBehaviour
                             targets[action] = unitTemp;
 
                             //Reduces the crit change
-                            selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance -= 14;
+                            selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance -= 25;
 
                             if (selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance < 0)
                                 selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance = 0;
 
-                            Debug.Log("Unit " + targets[action].GetComponent<Select_Unit>().unitInPos.name + " is in " + targets[action].name);
+                            targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance -= 25;
+
+                            if (targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance < 0)
+                                targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance = 0;
                             break;
                         }
                 }

@@ -5,6 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
 
+public enum UnitSpells
+{
+    watherBall,
+    slash,
+    stun,
+    heal
+}
+
 public class Unit_Info : MonoBehaviour
 {
     [Header("Essencials")]
@@ -72,6 +80,11 @@ public class Unit_Info : MonoBehaviour
     public float critChance;
     public float critDamageMult;
     public float critScaling;
+
+    [Header("-> Spells <-")]
+    public UnitSpells[] spells;
+    public int[] spellCost;
+
 
     [Header("-> UI <-")]
     public GameObject selectIcon;
