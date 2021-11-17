@@ -119,7 +119,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthSensitivity: 0.1
+    - _OutlineDepthSensitivity: 0.2
     - _OutlineNormalsSensitivity: 1
     - _OutlineThickness: 5
     - _Parallax: 0.005

@@ -15,6 +15,8 @@ public class Select_Unit : MonoBehaviour
     public GameObject hover;
     public bool isSelected;
 
+    public GameObject[] neighbor;
+
     private void Start()
     {
         transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = posColor;

@@ -226,7 +226,6 @@ public class New_Battle_System : MonoBehaviour
             isInBattle = false;
 
             // Reset player actions
-            currentAction = 0;
             for (int a = 0; a <= maximumActions -2; a += 2)
             {
                 actions[a] = BattleAction.None;
@@ -242,6 +241,8 @@ public class New_Battle_System : MonoBehaviour
             playerIsSelecting = true;
             playerIsTargetingEnemy = false;
             playerIsTargetingSelf = false;
+
+            currentAction = 0;
 
             // Enemy actions
             EnemyAI();
@@ -286,8 +287,11 @@ public class New_Battle_System : MonoBehaviour
                                 else
                                     defend = false;
 
+                                int damageTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().attackDamage;
+                                float critChanceTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance;
+                                float critMultTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critDamageMult;
 
-                                targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().TakeDamage(selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().attackDamage, defend);
+                                targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().TakeDamage(damageTemp, critChanceTemp, critMultTemp, defend);
                             }
                             break;
                         }
@@ -300,36 +304,54 @@ public class New_Battle_System : MonoBehaviour
 
                     case BattleAction.Move:
                         {
-                            // Play animation
-                            selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().animator.SetTrigger("move");
-                            targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().animator.SetTrigger("move");
+                            Select_Unit selectedUnit = selecteds[action].GetComponent<Select_Unit>();
+                            Select_Unit targetUnit = targets[action].GetComponent<Select_Unit>();
 
-                            // Change the units positions
-                            Vector3 transTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos.transform.position;
+                            Unit_Info selectedUnitInfo = selectedUnit.unitInPos.GetComponent<Unit_Info>();
+                            Unit_Info targetUnitInfo = targetUnit.unitInPos.GetComponent<Unit_Info>();
 
-                            selecteds[action].GetComponent<Select_Unit>().unitInPos.transform.position = targets[action].GetComponent<Select_Unit>().unitInPos.transform.position;
-                            targets[action].GetComponent<Select_Unit>().unitInPos.transform.position = transTemp;
+                            if (!targetUnitInfo.isDead)
+                            {
+                                // Play animation
+                                selectedUnitInfo.animator.SetTrigger("move");
+                                targetUnitInfo.animator.SetTrigger("move");
 
-                            // Change the targets
-                            GameObject posTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos;
-                            selecteds[action].GetComponent<Select_Unit>().unitInPos = targets[action].GetComponent<Select_Unit>().unitInPos;
-                            targets[action].GetComponent<Select_Unit>().unitInPos = posTemp;
+                                // Change the units positions
+                                Vector3 transTemp = selectedUnit.unitInPos.transform.position;
 
-                            // Change the position reference
-                            GameObject unitTemp = selecteds[action];
-                            selecteds[action] = targets[action];
-                            targets[action] = unitTemp;
+                                selectedUnit.unitInPos.transform.position = targetUnit.unitInPos.transform.position;
+                                targetUnit.unitInPos.transform.position = transTemp;
 
-                            //Reduces the crit change
-                            selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance -= 25;
+                                // Change the targets
+                                GameObject posTemp = selectedUnit.unitInPos;
 
-                            if (selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance < 0)
-                                selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance = 0;
+                                selectedUnit.unitInPos = targetUnit.unitInPos;
+                                targetUnit.unitInPos = posTemp;
 
-                            targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance -= 25;
+                                // Change the position reference
+                                GameObject unitTemp = selecteds[action];
 
-                            if (targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance < 0)
-                                targets[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance = 0;
+                                selecteds[action] = targets[action];
+                                targets[action] = unitTemp;
+
+                                Debug.Log("Unidade 1: " + selectedUnit.unitInPos.name);
+                                Debug.Log("Unidade 2: " + targetUnit.unitInPos.name);
+
+                                //Reduces the crit change
+                                selectedUnitInfo.critChance -= 25;
+
+                                if (selectedUnitInfo.critChance < 0)
+                                    selectedUnitInfo.critChance = 0;
+
+                                targetUnitInfo.critChance -= 25;
+
+                                if (targetUnitInfo.critChance < 0)
+                                    targetUnitInfo.critChance = 0;
+                            }
+                            else
+                            {
+                                NoAction();
+                            }
                             break;
                         }
                 }

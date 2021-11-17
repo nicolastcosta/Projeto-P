@@ -5,6 +5,17 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
 
+public enum UnitType
+{
+    SwordBoy,
+    ShieldBoy,
+    MageGirl,
+    Deamon,
+    Tentacle,
+    Kraken
+}
+
+
 public enum UnitSpells
 {
     watherBall,
@@ -15,14 +26,18 @@ public enum UnitSpells
 
 public class Unit_Info : MonoBehaviour
 {
-    [Header("Essencials")]
     //objeto que carrega o modelo
+    [Header("Essencials")]
     public GameObject model;
+
     //o animator que o modelo carrega
     [HideInInspector]
     public Animator animator;
+
     [HideInInspector]
     public NavMeshAgent navMesh;
+
+    public UnitType unitType; 
 
 
     [Header("-> Name <-")]
@@ -83,14 +98,17 @@ public class Unit_Info : MonoBehaviour
 
     [Header("-> Spells <-")]
     public UnitSpells[] spells;
+    public int[] spellDamage;
     public int[] spellCost;
+    public Sprite[] spellIcon;
+
 
 
     [Header("-> UI <-")]
     public GameObject selectIcon;
 
     [SerializeField]
-    private Slider lifeBar;
+    private GameObject lifeBar;
 
     [SerializeField]
     private GameObject damageIndicator;
@@ -128,24 +146,23 @@ public class Unit_Info : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isInCombat)
-        {
-            lifeBar.maxValue = lifeMax;
-            lifeBar.value = lifeCur;
-        }
+       if (isDead == true)
+            lifeBar.SetActive(false);
+       else
+            lifeBar.SetActive(true);
     }
 
-    public void TakeDamage(int damageTanken, bool isDefending)
+    public void TakeDamage(int damageTemp, float critChanceTemp, float critMultTemp, bool isDefending)
     {
-        float critChanceTemp = Random.Range(0, 100);
+        float critRandomizer = Random.Range(0, 100);
 
-        if (lifeCur > damageTanken)
+        int damage = damageTemp;
+
+        if (critRandomizer <= critChanceTemp)
+            damage = ((int)(damageTemp * critMultTemp));
+
+        if (lifeCur > damage)
         {
-            int damage = damageTanken;
-
-            if (critChanceTemp <= critChance)
-                damage = ((int)(damageTanken * critDamageMult));
-
             if (isDefending == false)
             {
                 lifeCur -= damage;
@@ -161,7 +178,7 @@ public class Unit_Info : MonoBehaviour
         }
         else
         {
-            damageIndicator.GetComponent<TextMeshProUGUI>().text = damageTanken.ToString();
+            damageIndicator.GetComponent<TextMeshProUGUI>().text = damageTemp.ToString();
             animator.SetBool("dead", true);
             lifeCur = 0;
             isDead = true;
