@@ -15,6 +15,7 @@ public enum BattleAction
 public class New_Battle_System : MonoBehaviour
 {
     public int currentTurn;
+    private float currentTimer;
     public float timer;
     
     [Header("-> Turn Actions <-")]
@@ -212,7 +213,7 @@ public class New_Battle_System : MonoBehaviour
 
     public void Actions(int action)
     {
-        timer = 0;
+        currentTimer = 0;
 
         if (action < maximumActions)
         {
@@ -371,14 +372,14 @@ public class New_Battle_System : MonoBehaviour
     // Time controller that keep the game going if has no actions left and still is in combat
     void NoActionTimer()
     {
-        if (timer >= 3 && isInBattle == true)
+        if (currentTimer >= timer && isInBattle == true)
         {
-            timer = 0;
+            currentTimer = 0;
             Actions(currentAction);
         }
-        else if (timer < 5 && isInBattle == true)
+        else if (currentTimer < timer && isInBattle == true)
         {
-            timer += 1 * Time.deltaTime;
+            currentTimer += 1 * Time.deltaTime;
         }
     }
 

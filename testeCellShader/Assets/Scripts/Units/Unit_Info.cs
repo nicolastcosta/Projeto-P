@@ -159,22 +159,25 @@ public class Unit_Info : MonoBehaviour
         int damage = damageTemp;
 
         if (critRandomizer <= critChanceTemp)
+        {
             damage = ((int)(damageTemp * critMultTemp));
+            damageIndicator.GetComponent<TextMeshProUGUI>().color = Color.red;
+        }
+        else
+            damageIndicator.GetComponent<TextMeshProUGUI>().color = Color.yellow;
+
+        if (isDefending == true)
+            damage /= 2;
 
         if (lifeCur > damage)
         {
+            lifeCur -= damage;
+            damageIndicator.GetComponent<TextMeshProUGUI>().text = damage.ToString();
+
             if (isDefending == false)
-            {
-                lifeCur -= damage;
-                damageIndicator.GetComponent<TextMeshProUGUI>().text = damage.ToString();
                 animator.SetTrigger("damaged");
-            }
             else
-            {
-                lifeCur -= damage / 2;
-                damageIndicator.GetComponent<TextMeshProUGUI>().text = (damage/2).ToString();
                 animator.SetTrigger("defend");
-            }
         }
         else
         {

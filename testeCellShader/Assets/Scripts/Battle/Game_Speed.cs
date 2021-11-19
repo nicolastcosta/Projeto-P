@@ -34,6 +34,7 @@ public class Game_Speed : MonoBehaviour
     public void IncreassesButton()
     {
         gameSpeed ++;
+        GetComponent<New_Battle_System>().timer --;
 
         switch (gameSpeed)
         {
@@ -59,6 +60,7 @@ public class Game_Speed : MonoBehaviour
     public void DecreassesButton()
     {
         gameSpeed --;
+        GetComponent<New_Battle_System>().timer ++;
 
         switch (gameSpeed)
         {
