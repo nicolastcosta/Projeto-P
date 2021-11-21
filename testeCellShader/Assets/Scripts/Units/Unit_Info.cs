@@ -10,7 +10,7 @@ public enum UnitType
     SwordBoy,
     ShieldBoy,
     MageGirl,
-    Deamon,
+    Demon,
     Tentacle,
     Kraken
 }
@@ -44,9 +44,6 @@ public class Unit_Info : MonoBehaviour
     public string unitName = "sem nome";
 
     [SerializeField]
-    private bool hasNameTag;
-
-    [SerializeField]
     private GameObject nameTagPrefab;
     
     [SerializeField]
@@ -58,22 +55,29 @@ public class Unit_Info : MonoBehaviour
     [HideInInspector]
     public GameObject nameTag;
 
-    [Header("-> Life <-")]
-    [Range(1, 500)]
-    public int lifeMax = 1;
+    [Header("-> Level <-")]
+    [Range(1, 20)]
+    public int unitLevel = 1;
 
-    [Range(1, 500)]
+    public int maxExp, curExp, expScaling;
+
+    [Header("-> Level Scaling <-")]
+    public int lifeScaling;
+    public int manaScaling;
+    public int damageScaling;
+
+    [Header("-> Life <-")]
+    public int lifeBase = 1;
+    public int lifeMax = 1;
     public int lifeCur = 1;
+    public int lifeBonus;
 
     [Range(0, 10)]
     public int armor = 0;
 
     [Header("-> Mana <-")]
-    [Range(0, 250)]
-    public int manaMax = 0;
-
-    [Range(0, 250)]
-    public int manaCur = 0;
+    public int manaBase;
+    public int manaMax, manaCur, manaBonus;
 
     [Header("-> Movement <-")]
     [Range(1, 10)]
@@ -91,7 +95,9 @@ public class Unit_Info : MonoBehaviour
     public GameObject unitPos;
 
     [Header("-> Basic Attack <-")]
-    public int attackDamage;
+    public int damageBase;
+    public int damage;
+    public int damageBonus;
     public float critChance;
     public float critDamageMult;
     public float critScaling;
@@ -113,43 +119,68 @@ public class Unit_Info : MonoBehaviour
     [SerializeField]
     private GameObject damageIndicator;
 
-    private Quaternion initialRotation;
-
 
     void Awake()
     {
-        animator = model.GetComponent<Animator>();
-        navMesh = GetComponent<NavMeshAgent>();
+        if (model != null)
+            animator = model.GetComponent<Animator>();
+        else
+            Debug.Log(gameObject.name + ": no model");
 
-        initialRotation = transform.rotation;
+        if (GetComponent<NavMeshAgent>())
+            navMesh = GetComponent<NavMeshAgent>();
 
-        if (hasNameTag == true)
+        if (nameTagPrefab != null && nameTagUI != null)
         {
-            if (nameTagPrefab != null && nameTagUI != null)
-            {
-                nameTag = Instantiate(nameTagPrefab, transform.position, Quaternion.identity) as GameObject;
-                nameTag.transform.parent = transform;
-                nameTag.GetComponent<Name_Tag>().SetAttributes(unitName, nameTagOffset);
-            }
-            else
-                Debug.Log("Error to create Name Tag");
+            nameTag = Instantiate(nameTagPrefab, transform.position, Quaternion.identity) as GameObject;
+            nameTag.transform.parent = transform;
+            nameTag.GetComponent<Name_Tag>().SetAttributes(unitName, nameTagOffset);
         }
 
-        if (minimapIcon != null)
+        if (minimapIcon != null && model != null)
         {
             GameObject minimapTemp = Instantiate(minimapIcon, transform.position, Quaternion.identity) as GameObject;
             minimapTemp.transform.parent = model.transform;
         }
-            
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (isDead == true)
-            lifeBar.SetActive(false);
-       else
-            lifeBar.SetActive(true);
+        LevelUP();
+        UpdateVitals();
+        LifeBar();
+    }
+
+    void LifeBar()
+    {
+        if (lifeBar != null)
+        {
+            if (isDead == true)
+                lifeBar.SetActive(false);
+            else
+                lifeBar.SetActive(true);
+        }
+    }
+
+    void LevelUP()
+    {
+        if (curExp >= maxExp)
+        {
+            curExp -= maxExp;
+            maxExp += expScaling;
+            unitLevel++;
+
+            lifeCur = lifeMax;
+        }
+    }
+
+    public void UpdateVitals()
+    {
+        lifeMax = lifeBase + lifeScaling * unitLevel + lifeBonus;
+        manaMax = manaBase + manaScaling * unitLevel + manaBonus;
+
+        damage = damageBase + damageScaling * unitLevel + damageBonus;
     }
 
     public void TakeDamage(int damageTemp, float critChanceTemp, float critMultTemp, bool isDefending)

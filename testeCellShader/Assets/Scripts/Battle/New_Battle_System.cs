@@ -288,7 +288,7 @@ public class New_Battle_System : MonoBehaviour
                                 else
                                     defend = false;
 
-                                int damageTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().attackDamage;
+                                int damageTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().damage;
                                 float critChanceTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critChance;
                                 float critMultTemp = selecteds[action].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().critDamageMult;
 

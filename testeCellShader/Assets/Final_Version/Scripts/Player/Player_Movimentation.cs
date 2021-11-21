@@ -15,24 +15,50 @@ public class Player_Movimentation : MonoBehaviour
     private Vector3 moveDirection;
     private Quaternion targetAngle;
 
+    private Unit_Info unitInfo;
 
     // Start is called before the first frame update
     void Awake()
     {
-        unitModel = GetComponent<Unit_Info>().model;
-        animator = GetComponent<Unit_Info>().animator;
-        controller = GetComponent<CharacterController>();
+        if (GetComponent<Unit_Info>())
+        {
+            unitInfo = GetComponent<Unit_Info>();
+
+            if (unitInfo.model != null)
+            {
+                unitModel = unitInfo.model;
+
+                if (unitInfo.animator != null)
+                    animator = unitInfo.animator;
+                else
+                    Debug.Log("Player movement has no animator");
+            }
+            else
+                Debug.Log("Player movement has no model");
+
+            if (GetComponent<CharacterController>())
+                controller = GetComponent<CharacterController>();
+            else
+                Debug.Log("Player movement needs the Character Controller");
+        }
+        else
+            Debug.Log("Player movement needs the Unit_Info script");
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveSpeed = GetComponent<Unit_Info>().speed;
-        turnRate = GetComponent<Unit_Info>().turnRate;
+        if (GetComponent<Unit_Info>() == true && GetComponent<CharacterController>() == true)
+        {
+            moveSpeed = unitInfo.speed;
+            animator.SetFloat("moveSpeed", moveSpeed);
 
-        Gravity();
-        Turn();
-        Move();
+            turnRate = unitInfo.turnRate;
+
+            Gravity();
+            Turn();
+            Move();
+        }
     }
 
     void Turn()
@@ -56,17 +82,21 @@ public class Player_Movimentation : MonoBehaviour
     void Move()
     {
         Vector2 inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y);
+        moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y).normalized;
         
         Vector3 velocity = moveDirection * moveSpeed + Vector3.up * gravityVelocity;
-        
+
         if (velocity != Vector3.zero)
         {
             controller.Move(velocity * Time.deltaTime);
-            
-            animator.SetBool("running", true);
+
+            if (animator != null)
+                animator.SetBool("walking", true);
         }
         else
-            animator.SetBool("running", false);
+        {
+            if (animator != null)
+                animator.SetBool("walking", false);
+        }
     }
 }

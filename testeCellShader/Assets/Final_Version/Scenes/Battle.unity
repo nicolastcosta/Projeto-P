@@ -307,15 +307,21 @@ MonoBehaviour:
   animator: {fileID: 0}
   navMesh: {fileID: 0}
   unitType: 2
-  unitName: sem nome
+  unitName: "Irm\xE3 do Melhor Amigo"
   hasNameTag: 0
   nameTagPrefab: {fileID: 0}
   nameTagUI: {fileID: 0}
   nameTagOffset: {x: 0, y: 0, z: 0}
   nameTag: {fileID: 0}
+  unitLevel: 1
+  lifeScaling: 1
+  manaScaling: 1
+  damageScaling: 1
+  lifeBase: 1
   lifeMax: 40
   lifeCur: 40
   armor: 0
+  manaBase: 0
   manaMax: 125
   manaCur: 125
   speed: 1
@@ -936,15 +942,21 @@ MonoBehaviour:
   animator: {fileID: 0}
   navMesh: {fileID: 0}
   unitType: 3
-  unitName: sem nome
+  unitName: Demtres
   hasNameTag: 0
   nameTagPrefab: {fileID: 0}
   nameTagUI: {fileID: 0}
   nameTagOffset: {x: 0, y: 0, z: 0}
   nameTag: {fileID: 0}
+  unitLevel: 1
+  lifeScaling: 10
+  manaScaling: 0
+  damageScaling: 2
+  lifeBase: 100
   lifeMax: 100
   lifeCur: 100
   armor: 0
+  manaBase: 0
   manaMax: 0
   manaCur: 0
   speed: 1
@@ -9727,15 +9739,21 @@ MonoBehaviour:
   animator: {fileID: 0}
   navMesh: {fileID: 0}
   unitType: 3
-  unitName: sem nome
+  unitName: Demdois
   hasNameTag: 0
   nameTagPrefab: {fileID: 0}
   nameTagUI: {fileID: 0}
   nameTagOffset: {x: 0, y: 0, z: 0}
   nameTag: {fileID: 0}
+  unitLevel: 1
+  lifeScaling: 10
+  manaScaling: 0
+  damageScaling: 2
+  lifeBase: 100
   lifeMax: 100
   lifeCur: 100
   armor: 0
+  manaBase: 0
   manaMax: 0
   manaCur: 0
   speed: 1
@@ -13051,15 +13069,21 @@ MonoBehaviour:
   animator: {fileID: 0}
   navMesh: {fileID: 0}
   unitType: 3
-  unitName: sem nome
+  unitName: Demum
   hasNameTag: 0
   nameTagPrefab: {fileID: 0}
   nameTagUI: {fileID: 0}
   nameTagOffset: {x: 0, y: 0, z: 0}
   nameTag: {fileID: 0}
+  unitLevel: 1
+  lifeScaling: 10
+  manaScaling: 0
+  damageScaling: 2
+  lifeBase: 100
   lifeMax: 100
   lifeCur: 100
   armor: 0
+  manaBase: 0
   manaMax: 0
   manaCur: 0
   speed: 1
@@ -13174,15 +13198,21 @@ MonoBehaviour:
   animator: {fileID: 0}
   navMesh: {fileID: 0}
   unitType: 0
-  unitName: sem nome
+  unitName: Minha Bunda
   hasNameTag: 0
   nameTagPrefab: {fileID: 0}
   nameTagUI: {fileID: 0}
   nameTagOffset: {x: 0, y: 0, z: 0}
   nameTag: {fileID: 0}
+  unitLevel: 1
+  lifeScaling: 1
+  manaScaling: 1
+  damageScaling: 1
+  lifeBase: 1
   lifeMax: 60
   lifeCur: 60
   armor: 0
+  manaBase: 0
   manaMax: 90
   manaCur: 90
   speed: 1
@@ -14709,15 +14739,21 @@ MonoBehaviour:
   animator: {fileID: 0}
   navMesh: {fileID: 0}
   unitType: 1
-  unitName: sem nome
+  unitName: Melhor Amigo
   hasNameTag: 0
   nameTagPrefab: {fileID: 0}
   nameTagUI: {fileID: 0}
   nameTagOffset: {x: 0, y: 0, z: 0}
   nameTag: {fileID: 0}
+  unitLevel: 1
+  lifeScaling: 1
+  manaScaling: 1
+  damageScaling: 1
+  lifeBase: 1
   lifeMax: 100
   lifeCur: 100
   armor: 0
+  manaBase: 0
   manaMax: 65
   manaCur: 65
   speed: 1
