@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MapaCompleto.unity
-    guid: 256c187caada66946b35e6b84644774f
+    path: Assets/Final_Version/Scenes/Menu.unity
+    guid: ed0bb7a06e7983c45b15eeaec2bd7fe6
+  - enabled: 1
+    path: Assets/Final_Version/Scenes/City.unity
+    guid: 442b41b29faa4a6479aef753b2470cf8
+  - enabled: 1
+    path: Assets/Final_Version/Scenes/Battle.unity
+    guid: 9b9e5efc2e1076942bab45ddc657f562
   m_configObjects: {}
