@@ -29,31 +29,31 @@ ModelImporter:
     second: Armature|Victory
   - first:
       74: 8349542763059015795
-    second: Demon_Walk
+    second: Demon_OLD_Walk
   - first:
       74: -6281818403337651123
-    second: Demon_Attack_1
+    second: Demon_OLD_Attack_1
   - first:
       74: 5304308412320976388
-    second: Demon_Attack_2
+    second: Demon_OLD_Attack_2
   - first:
       74: -804329610933823718
-    second: Demon_Attack_3
+    second: Demon_OLD_Attack_3
   - first:
       74: 6100571130288327357
-    second: Demon_Block
+    second: Demon_OLD_Block
   - first:
       74: -8147279428798789113
-    second: Demon_Damaged
+    second: Demon_OLD_Damaged
   - first:
       74: -2700248821267549350
-    second: Demon_Dead
+    second: Demon_OLD_Dead
   - first:
       74: 3783030057306185206
-    second: Demon_Stand
+    second: Demon_OLD_Stand
   - first:
       74: -6778398941786290437
-    second: Demon_Victory
+    second: Demon_OLD_Victory
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -83,7 +83,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Demon_Attack_1
+      name: Demon_OLD_Attack_1
       takeName: Armature|Attack_1
       internalID: 0
       firstFrame: 0
@@ -112,7 +112,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Demon_Attack_2
+      name: Demon_OLD_Attack_2
       takeName: Armature|Attack_2
       internalID: 0
       firstFrame: 0
@@ -141,7 +141,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Demon_Attack_3
+      name: Demon_OLD_Attack_3
       takeName: Armature|Attack_3
       internalID: 0
       firstFrame: 0
@@ -170,7 +170,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Demon_Block
+      name: Demon_OLD_Block
       takeName: Armature|Block
       internalID: 0
       firstFrame: 0
@@ -199,7 +199,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Demon_Damaged
+      name: Demon_OLD_Damaged
       takeName: Armature|Damaged
       internalID: 0
       firstFrame: 0
@@ -228,7 +228,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Demon_Dead
+      name: Demon_OLD_Dead
       takeName: Armature|Dead
       internalID: 0
       firstFrame: 0
@@ -257,7 +257,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Demon_Stand
+      name: Demon_OLD_Stand
       takeName: Armature|Stand
       internalID: 0
       firstFrame: 0
@@ -286,7 +286,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Demon_Victory
+      name: Demon_OLD_Victory
       takeName: Armature|Victory
       internalID: 0
       firstFrame: 0
@@ -315,7 +315,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Demon_Walk
+      name: Demon_OLD_Walk
       takeName: Armature|Walk
       internalID: 0
       firstFrame: 0
