@@ -59,7 +59,8 @@ public class Unit_Info : MonoBehaviour
     [Range(1, 20)]
     public int unitLevel = 1;
 
-    public int maxExp, curExp, expScaling;
+    public int[] maxExp;
+    public int curExp;
 
     [Header("-> Level Scaling <-")]
     public int lifeScaling;
@@ -120,7 +121,7 @@ public class Unit_Info : MonoBehaviour
     private GameObject damageIndicator;
 
 
-    void Awake()
+    void Start()
     {
         if (model != null)
             animator = model.GetComponent<Animator>();
@@ -137,11 +138,33 @@ public class Unit_Info : MonoBehaviour
             nameTag.GetComponent<Name_Tag>().SetAttributes(unitName, nameTagOffset);
         }
 
-        if (minimapIcon != null && model != null)
+        if (minimapIcon != null && model != null && isDead == false)
         {
             GameObject minimapTemp = Instantiate(minimapIcon, transform.position, Quaternion.identity) as GameObject;
             minimapTemp.transform.rotation = model.transform.rotation;
             minimapTemp.transform.parent = model.transform;
+        }
+
+        if (tag == "Player")
+        {
+            if (isInCombat == false)
+            {
+                if (Scene_Variables.instance.playerCurrentPosition != Vector3.zero)
+                    transform.position = Scene_Variables.instance.playerCurrentPosition;
+            }
+
+            unitLevel = PlayerPrefs.GetInt("playerLevel");
+            curExp = PlayerPrefs.GetInt("playerExp");
+        }
+        else if (tag == "Companion_1")
+        {
+            if (Scene_Variables.instance.companion1CurrentPosition != Vector3.zero)
+                transform.position = Scene_Variables.instance.companion1CurrentPosition;
+        }
+        else if (tag == "Companion_2")
+        {
+            if (Scene_Variables.instance.companion2CurrentPosition != Vector3.zero)
+                transform.position = Scene_Variables.instance.companion2CurrentPosition;
         }
     }
 
@@ -149,6 +172,7 @@ public class Unit_Info : MonoBehaviour
     void Update()
     {
         animator.SetBool("combat", isInCombat);
+        animator.SetBool("dead", isDead);
         LevelUP();
         UpdateVitals();
         LifeBar();
@@ -167,19 +191,19 @@ public class Unit_Info : MonoBehaviour
 
     void LevelUP()
     {
-        if (curExp >= maxExp)
+        if (curExp >= maxExp[unitLevel - 1])
         {
-            curExp -= maxExp;
+            curExp -= maxExp[unitLevel];
             unitLevel++;
 
             lifeCur = lifeMax;
+
+            PlayerPrefs.SetInt("playerLevel", unitLevel);
         }
     }
 
     public void UpdateVitals()
     {
-        maxExp = expScaling * unitLevel;
-        
         lifeMax = lifeBase + lifeScaling * (unitLevel - 1) + lifeBonus;
         manaMax = manaBase + manaScaling * (unitLevel - 1) + manaBonus;
 

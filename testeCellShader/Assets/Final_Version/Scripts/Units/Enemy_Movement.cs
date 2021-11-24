@@ -38,40 +38,43 @@ public class Enemy_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<NavMeshAgent>())
+        if (GetComponent<NavMeshAgent>() && GetComponent<Unit_Info>())
         {
-            navMesh.speed = unitInfo.speed;
-            navMesh.angularSpeed = unitInfo.turnRate;
-
-
-            if (wandering == false)
+            if (unitInfo.isDead == false)
             {
-                if (timer < wanderDelay)
+                navMesh.speed = unitInfo.speed;
+                navMesh.angularSpeed = unitInfo.turnRate;
+
+
+                if (wandering == false)
                 {
-                    timer += 1 * Time.deltaTime;
+                    if (timer < wanderDelay)
+                    {
+                        timer += 1 * Time.deltaTime;
+                    }
+                    else
+                    {
+                        timer = 0;
+
+                        float randomX = Random.Range(wanderArea * -1, wanderArea);
+                        float randomZ = Random.Range(wanderArea * -1, wanderArea);
+
+                        Vector3 newPosition = new Vector3(startPosition.x + randomX, startPosition.y, startPosition.z + randomZ);
+
+                        navMesh.SetDestination(newPosition);
+                    }
+                }
+
+                if (navMesh.remainingDistance > navMesh.stoppingDistance)
+                {
+                    unitInfo.animator.SetBool("walking", true);
+                    wandering = true;
                 }
                 else
                 {
-                    timer = 0;
-
-                    float randomX = Random.Range(wanderArea * -1, wanderArea);
-                    float randomZ = Random.Range(wanderArea * -1, wanderArea);
-
-                    Vector3 newPosition = new Vector3(startPosition.x + randomX, startPosition.y, startPosition.z + randomZ);
-
-                    navMesh.SetDestination(newPosition);
+                    unitInfo.animator.SetBool("walking", false);
+                    wandering = false;
                 }
-            }
-
-            if (navMesh.remainingDistance > navMesh.stoppingDistance)
-            {
-                unitInfo.animator.SetBool("walking", true);
-                wandering = true;
-            }
-            else
-            {
-                unitInfo.animator.SetBool("walking", false);
-                wandering = false;
             }
         }
     }

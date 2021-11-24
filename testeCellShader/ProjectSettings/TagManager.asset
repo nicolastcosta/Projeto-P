@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Companion
+  - Companion_1
+  - Companion_2
+  - Environment
   layers:
   - Default
   - TransparentFX

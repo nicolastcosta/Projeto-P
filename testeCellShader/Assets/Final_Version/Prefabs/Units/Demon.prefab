@@ -56,9 +56,8 @@ MonoBehaviour:
   nameTagOffset: {x: 0, y: 0, z: 0}
   nameTag: {fileID: 0}
   unitLevel: 1
-  maxExp: 10
+  maxExp: 0a000000140000001e00000028000000320000003c00000046000000500000005a000000640000006e00000078000000820000008c00000096000000a0000000aa000000b4000000be000000c8000000
   curExp: 0
-  expScaling: 10
   lifeScaling: 0
   manaScaling: 0
   damageScaling: 0
@@ -201,7 +200,7 @@ PrefabInstance:
     - target: {fileID: 7094331336853400817, guid: 9222af16845d3da429bfbfd34b52d07e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 923804369f6daf34891eb97098d46b11, type: 2}
+      objectReference: {fileID: 2100000, guid: 0024f15611e026b4c9d490c170746668, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9222af16845d3da429bfbfd34b52d07e, type: 3}
 --- !u!1 &3317995442436732759 stripped

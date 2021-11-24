@@ -8,6 +8,7 @@ public class Select_Unit : MonoBehaviour
     private GameObject battleSystem;
 
     public GameObject unitInPos;
+    public GameObject selectIcon;
 
     public Color posColor;
 
@@ -55,7 +56,7 @@ public class Select_Unit : MonoBehaviour
                     {
                         if (battleSystem.GetComponent<New_Battle_System>().playerIsSelecting == true || battleSystem.GetComponent<New_Battle_System>().playerIsTargetingSelf == true)
                         {
-                            unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(true);
+                            selectIcon.SetActive(true);
                             hover = gameObject;
                         }
                         break;
@@ -64,7 +65,7 @@ public class Select_Unit : MonoBehaviour
                     {
                         if (battleSystem.GetComponent<New_Battle_System>().playerIsTargetingEnemy == true)
                         {
-                            unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(true);
+                            selectIcon.SetActive(true);
                             hover = gameObject;
                         }
                         break;
@@ -78,7 +79,7 @@ public class Select_Unit : MonoBehaviour
     {
         if(isSelected == false)
         {
-            unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(false);
+            selectIcon.SetActive(false);
             hover = null;
         }
     }

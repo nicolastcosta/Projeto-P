@@ -50,6 +50,9 @@ public class New_Battle_System : MonoBehaviour
     [SerializeField]
     private GameObject fadeEffect;
 
+    [SerializeField]
+    private Button moveButton;
+
     private void Awake()
     {
         if (Scene_Variables.instance != null)
@@ -115,14 +118,20 @@ public class New_Battle_System : MonoBehaviour
 
             Scene_Variables.instance.exp = 0;
 
+            PlayerPrefs.SetInt("isDead" + Scene_Variables.instance.enemyIndex.ToString(), 0);
+
             fadeEffect.GetComponent<Animator>().Play("Lose");
         }
+        else if (numberOfPlayerUnits == 1)
+            moveButton.interactable = false;
 
         if (numberOfEnemyUnits == 0)
         {
             endCombat = true;
 
             Scene_Variables.instance.exp = 15;
+
+            PlayerPrefs.SetInt("isDead" + Scene_Variables.instance.enemyIndex.ToString(), 1);
 
             fadeEffect.GetComponent<Animator>().Play("Victory");
         }
@@ -135,7 +144,7 @@ public class New_Battle_System : MonoBehaviour
         if (selecteds[currentAction] != null)
         {
             selecteds[currentAction].GetComponent<Select_Unit>().isSelected = false;
-            selecteds[currentAction].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(false);
+            selecteds[currentAction].GetComponent<Select_Unit>().selectIcon.SetActive(false);
         }
 
         // Select the unit
@@ -154,8 +163,8 @@ public class New_Battle_System : MonoBehaviour
         targets[currentAction].GetComponent<Select_Unit>().hover = null;
         selecteds[currentAction].GetComponent<Select_Unit>().isSelected = false;
 
-        selecteds[currentAction].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(false);
-        targets[currentAction].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(false);
+        selecteds[currentAction].GetComponent<Select_Unit>().selectIcon.SetActive(false);
+        targets[currentAction].GetComponent<Select_Unit>().selectIcon.SetActive(false);
 
         // Update the action icon to show the target
         ChangeActionIcon(currentAction);
@@ -174,8 +183,11 @@ public class New_Battle_System : MonoBehaviour
 
         selecteds[currentAction].GetComponent<Select_Unit>().isSelected = false;
 
-        selecteds[currentAction].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(false);
-        targets[currentAction].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(false);
+        selecteds[currentAction].GetComponent<Select_Unit>().selectIcon.SetActive(false);
+        targets[currentAction].GetComponent<Select_Unit>().selectIcon.SetActive(false);
+
+        selecteds[currentAction].GetComponent<Select_Unit>().unitInPos.transform.position = targets[currentAction].transform.position;
+        targets[currentAction].GetComponent<Select_Unit>().unitInPos.transform.position = selecteds[currentAction].transform.position;
 
         // Update the action icon to show the target
         ChangeActionIcon(currentAction);
@@ -207,7 +219,7 @@ public class New_Battle_System : MonoBehaviour
         selecteds[currentAction].GetComponent<Select_Unit>().hover = null;
         selecteds[currentAction].GetComponent<Select_Unit>().isSelected = false;
 
-        selecteds[currentAction].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(false);
+        selecteds[currentAction].GetComponent<Select_Unit>().selectIcon.SetActive(false);
 
         // Select the action and change the icon
         actions[currentAction] = BattleAction.Defend;
@@ -231,7 +243,7 @@ public class New_Battle_System : MonoBehaviour
         selecteds[currentAction].GetComponent<Select_Unit>().hover = null;
         selecteds[currentAction].GetComponent<Select_Unit>().isSelected = true;
 
-        selecteds[currentAction].GetComponent<Select_Unit>().unitInPos.GetComponent<Unit_Info>().selectIcon.SetActive(true);
+        selecteds[currentAction].GetComponent<Select_Unit>().selectIcon.SetActive(true);
 
         // Select the action and change the icon
         actions[currentAction] = BattleAction.Move;
@@ -267,6 +279,12 @@ public class New_Battle_System : MonoBehaviour
     {
         isInBattle = true;
         currentAction = 0;
+
+        for (int u = 0; u < playerUnitsPosition.Length; u++)
+        {
+            playerUnitsPosition[u].GetComponent<Select_Unit>().unitInPos.transform.position = playerUnitsPosition[u].transform.position;
+        }
+
         Actions(currentAction);
     }
 

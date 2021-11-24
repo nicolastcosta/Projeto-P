@@ -18,7 +18,7 @@ public class Player_Movimentation : MonoBehaviour
     private Unit_Info unitInfo;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         if (GetComponent<Unit_Info>())
         {

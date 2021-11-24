@@ -43,7 +43,7 @@ public class Unit_Level_Bar : MonoBehaviour
         {
             if (unit.GetComponent<Unit_Info>() && levelBar != null && levelText != null)
             {
-                levelBar.fillAmount = ((float)unitInfo.curExp / (float)unitInfo.maxExp);
+                levelBar.fillAmount = ((float)unitInfo.curExp / (float)unitInfo.maxExp[unitInfo.unitLevel - 1]);
                 levelText.text = unitInfo.unitLevel.ToString();
             }
         }
