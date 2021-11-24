@@ -1,0 +1,255 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8140187427312016860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8140187427312016859}
+  - component: {fileID: 8140187427312016858}
+  - component: {fileID: 8140187427312016857}
+  - component: {fileID: 6948256588423904373}
+  - component: {fileID: 3308006530229708661}
+  - component: {fileID: 7970916376514155145}
+  m_Layer: 0
+  m_Name: Melhor_Amigo
+  m_TagString: Companion
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8140187427312016859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8140187427312016860}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.07, y: 0, z: 55.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8610170190782711260}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8140187427312016858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8140187427312016860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d129029e3cd89429ffd3fa3044f978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 8950526611110928230}
+  animator: {fileID: 0}
+  navM: {fileID: 0}
+  unitType: 1
+  unitName: Melhor Amigo
+  nameTagPrefab: {fileID: 0}
+  nameTagUI: {fileID: 0}
+  nameTagOffset: {x: 0, y: 0, z: 0}
+  nameTag: {fileID: 0}
+  unitLevel: 1
+  maxExp: 10
+  curExp: 0
+  expScaling: 15
+  lifeScaling: 15
+  manaScaling: 0
+  damageScaling: 1
+  lifeBase: 100
+  lifeMax: 100
+  lifeCur: 100
+  lifeBonus: 0
+  armor: 0
+  manaBase: 0
+  manaMax: 0
+  manaCur: 0
+  manaBonus: 0
+  speed: 4
+  turnRate: 720
+  minimapIcon: {fileID: 109750312236548554, guid: 1047ea15cb3fc18449f5f1ef0a3a3c21, type: 3}
+  battleSystem: {fileID: 0}
+  isInCombat: 0
+  isDead: 0
+  unitPos: {fileID: 0}
+  damageBase: 2
+  damage: 2
+  damageBonus: 0
+  critChance: 0
+  critDamageMult: 5
+  critScaling: 10
+  spells: 
+  spellDamage: 
+  spellCost: 
+  spellIcon: []
+  selectIcon: {fileID: 0}
+  lifeBar: {fileID: 0}
+  damageIndicator: {fileID: 0}
+--- !u!114 &8140187427312016857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8140187427312016860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989e61c8f45e8434499ac03ccccfba07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &6948256588423904373
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8140187427312016860}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0.1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.25
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &3308006530229708661
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8140187427312016860}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.25
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.125, z: 0}
+--- !u!136 &7970916376514155145
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8140187427312016860}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &8140187426673893943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8140187427312016859}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7255428090118606809, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dcddb987d59bd2845943b734a0699198, type: 2}
+    - target: {fileID: 919132149155446097, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_Name
+      value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_TagString
+      value: Companion
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178906957316836352, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dcddb987d59bd2845943b734a0699198, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+--- !u!1 &8950526611110928230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+  m_PrefabInstance: {fileID: 8140187426673893943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8610170190782711260 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 335bd4af52be2d44a91961fbd294901f, type: 3}
+  m_PrefabInstance: {fileID: 8140187426673893943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &667424510923702900
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8950526611110928230}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2140baf3364cc2f499b5698ecbb57f0d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

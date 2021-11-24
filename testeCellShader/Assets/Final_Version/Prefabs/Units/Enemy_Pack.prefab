@@ -70,6 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5009856084495373781}
   - component: {fileID: 8552375942862813938}
+  - component: {fileID: 8675132461599225045}
   m_Layer: 0
   m_Name: Enemy_Pack
   m_TagString: Enemy
@@ -112,6 +113,23 @@ MonoBehaviour:
   target:
   - {fileID: 5009856084272359859}
   - {fileID: 5009856083713041885}
+--- !u!114 &8675132461599225045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5009856084495373739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82348e8ae2d7fea4db52ea7ce510b4ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packLevel: 1
+  units:
+  - {fileID: 5009856084802916712}
+  - {fileID: 163613617160716992}
+  - {fileID: 656986677860308822}
 --- !u!1001 &586602837484856995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,6 +227,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wanderArea: 6
   wanderDelay: 5
+--- !u!114 &7222993420683268827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5009856084802916712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0c9509c1627514b8b65e7b234933dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPack: {fileID: 5009856084495373739}
+  searchArea: {fileID: 6349884293036362289}
+--- !u!136 &6349884293036362289
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5009856084802916712}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 6
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4952983618818646173
 PrefabInstance:
   m_ObjectHideFlags: 0

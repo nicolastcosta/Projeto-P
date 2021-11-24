@@ -83,7 +83,10 @@ public class Player_Movimentation : MonoBehaviour
     {
         Vector2 inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y).normalized;
-        
+
+        if (unitInfo.isInCombat == true)
+            moveDirection = Vector3.zero;
+
         Vector3 velocity = moveDirection * moveSpeed + Vector3.up * gravityVelocity;
 
         if (velocity != Vector3.zero)

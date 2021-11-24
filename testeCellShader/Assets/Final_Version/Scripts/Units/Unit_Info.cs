@@ -148,6 +148,7 @@ public class Unit_Info : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetBool("combat", isInCombat);
         LevelUP();
         UpdateVitals();
         LifeBar();
@@ -169,7 +170,6 @@ public class Unit_Info : MonoBehaviour
         if (curExp >= maxExp)
         {
             curExp -= maxExp;
-            maxExp += expScaling;
             unitLevel++;
 
             lifeCur = lifeMax;
@@ -178,10 +178,12 @@ public class Unit_Info : MonoBehaviour
 
     public void UpdateVitals()
     {
-        lifeMax = lifeBase + lifeScaling * unitLevel + lifeBonus;
-        manaMax = manaBase + manaScaling * unitLevel + manaBonus;
+        maxExp = expScaling * unitLevel;
+        
+        lifeMax = lifeBase + lifeScaling * (unitLevel - 1) + lifeBonus;
+        manaMax = manaBase + manaScaling * (unitLevel - 1) + manaBonus;
 
-        damage = damageBase + damageScaling * unitLevel + damageBonus;
+        damage = damageBase + damageScaling * (unitLevel - 1) + damageBonus;
     }
 
     public void TakeDamage(int damageTemp, float critChanceTemp, float critMultTemp, bool isDefending)

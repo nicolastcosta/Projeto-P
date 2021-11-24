@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Final_Version/Scenes/City.unity
     guid: 442b41b29faa4a6479aef753b2470cf8
   - enabled: 1
-    path: Assets/Final_Version/Scenes/Battle.unity
+    path: Assets/Final_Version/Scenes/Combat.unity
     guid: 9b9e5efc2e1076942bab45ddc657f562
   m_configObjects: {}

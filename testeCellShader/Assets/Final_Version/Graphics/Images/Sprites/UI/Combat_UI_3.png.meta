@@ -17,6 +17,21 @@ TextureImporter:
   - first:
       213: 6939075681426858622
     second: Panel_Background
+  - first:
+      213: -2856352031974798026
+    second: Action_Icon_Attack
+  - first:
+      213: 9208285114627897508
+    second: Fade_Effect_Sword
+  - first:
+      213: 5031601834565659288
+    second: Fade_Effect_Skull_Top
+  - first:
+      213: -8832163778804356888
+    second: Fade_Effect_Skull_Bot
+  - first:
+      213: -5260492093042378433
+    second: Fade_Effect_Crown
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -208,10 +223,10 @@ TextureImporter:
       name: Action_Icon_Defend
       rect:
         serializedVersion: 2
-        x: 303
+        x: 302
         y: 606
-        width: 162
-        height: 162
+        width: 165
+        height: 165
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,6 +257,111 @@ TextureImporter:
       bones: []
       spriteID: e72eff4419c8c4060800000000000000
       internalID: 6939075681426858622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Action_Icon_Attack
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 603
+        width: 165
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63d4da4e5f23c58d0800000000000000
+      internalID: -2856352031974798026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fade_Effect_Sword
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 623
+        width: 68
+        height: 260
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a8b9ef26866acf70800000000000000
+      internalID: 9208285114627897508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fade_Effect_Skull_Top
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 892
+        width: 116
+        height: 142
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89a6d70c537d3d540800000000000000
+      internalID: 5031601834565659288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fade_Effect_Skull_Bot
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 865
+        width: 59
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e86b4686d9dd6580800000000000000
+      internalID: -8832163778804356888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fade_Effect_Crown
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 625
+        width: 174
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f39357a005afef6b0800000000000000
+      internalID: -5260492093042378433
       vertices: []
       indices: 
       edges: []

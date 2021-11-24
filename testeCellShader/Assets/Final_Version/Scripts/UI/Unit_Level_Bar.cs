@@ -19,25 +19,33 @@ public class Unit_Level_Bar : MonoBehaviour
 
     private void Awake()
     {
-        if (unit.GetComponent<Unit_Info>())
-            unitInfo = unit.GetComponent<Unit_Info>();
+        if (unit != null)
+        {
+            if (unit.GetComponent<Unit_Info>())
+                unitInfo = unit.GetComponent<Unit_Info>();
+            else
+                Debug.Log("The unit of Unit Level Bar needs Unit Info script");
+
+            if (levelBar == null)
+                Debug.Log("Unit Level Bar needs a level bar");
+
+            if (levelText == null)
+                Debug.Log("Unit Level Bar needs a level text");
+        }
         else
-            Debug.Log("The unit of Unit Level Bar needs Unit Info script");
-
-        if (levelBar == null)
-            Debug.Log("Unit Level Bar needs a level bar");
-
-        if (levelText == null)
-            Debug.Log("Unit Level Bar needs a level text");
+            Debug.Log("Unit level bar has no unit reference");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (unit.GetComponent<Unit_Info>() && levelBar != null && levelText != null)
+        if (unit != null)
         {
-            levelBar.fillAmount = ((float)unitInfo.curExp / (float)unitInfo.maxExp);
-            levelText.text = unitInfo.unitLevel.ToString();
+            if (unit.GetComponent<Unit_Info>() && levelBar != null && levelText != null)
+            {
+                levelBar.fillAmount = ((float)unitInfo.curExp / (float)unitInfo.maxExp);
+                levelText.text = unitInfo.unitLevel.ToString();
+            }
         }
     }
 }
